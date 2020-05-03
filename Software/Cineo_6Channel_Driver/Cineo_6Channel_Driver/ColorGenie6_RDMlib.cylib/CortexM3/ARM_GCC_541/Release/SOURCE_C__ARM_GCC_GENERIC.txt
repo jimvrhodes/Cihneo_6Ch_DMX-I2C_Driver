@@ -1,0 +1,1 @@
+'C:\Users\jimvr\Desktop\Cineo_6Channel_Driver\Cineo_6Channel_Driver\ColorGenie6_RDMlib.cylib\dmx.c' -o .o -T SOURCE_C__ARM_GCC_GENERIC -f 'C:\Users\jimvr\Desktop\Cineo_6Channel_Driver\Cineo_6Channel_Driver\ColorGenie6_RDMlib.cylib\CortexM3\ARM_GCC_541\Release\.deps\SOURCE_C__ARM_GCC_GENERIC.d'

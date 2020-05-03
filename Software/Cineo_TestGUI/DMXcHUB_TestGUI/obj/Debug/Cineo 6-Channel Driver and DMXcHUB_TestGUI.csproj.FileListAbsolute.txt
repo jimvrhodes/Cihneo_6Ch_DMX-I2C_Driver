@@ -1,0 +1,15 @@
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\bin\Debug\DMXcHUB_TestGUI.exe.config
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\bin\Debug\DMXcHUB_TestGUI.exe.manifest
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\bin\Debug\DMXcHUB_TestGUI.application
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\bin\Debug\DMXcHUB_TestGUI.exe
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\bin\Debug\DMXcHUB_TestGUI.pdb
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\Cineo 6-Channel Driver and DMXcHUB_TestGUI.csprojAssemblyReference.cache
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.FormMain.resources
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.FormSerialSnooper.resources
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.Properties.Resources.resources
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\Cineo 6-Channel Driver and DMXcHUB_TestGUI.csproj.GenerateResource.cache
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\Cineo 6-Channel Driver and DMXcHUB_TestGUI.csproj.CoreCompileInputs.cache
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.exe.manifest
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.application
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.exe
+D:\Dropbox (NED)\NED_Repo\Cineo\ColorGenie_6Channel\Software\ColorGenie_TestGUI\DMXcHUB_TestGUI\obj\Debug\DMXcHUB_TestGUI.pdb

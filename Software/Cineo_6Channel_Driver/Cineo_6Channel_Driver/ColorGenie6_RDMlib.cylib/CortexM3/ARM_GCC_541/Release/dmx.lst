@@ -1,0 +1,2606 @@
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"dmx.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.transmitResponse,"ax",%progbits
+  20              		.align	1
+  21              		.global	transmitResponse
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	transmitResponse, %function
+  25              	transmitResponse:
+  26              	.LFB0:
+  27              		.file 1 "dmx.c"
+   1:dmx.c         **** /*
+   2:dmx.c         **** 
+   3:dmx.c         ****     dmx.c
+   4:dmx.c         ****     *****************************************************************************
+   5:dmx.c         ****     * Copyright (2014 - 2019) The NED Group
+   6:dmx.c         ****     ******************************************************************************
+   7:dmx.c         ****     see main.c for full disclaimer
+   8:dmx.c         ****     
+   9:dmx.c         **** */
+  10:dmx.c         ****     
+  11:dmx.c         **** #include "RDM_Header.h"
+  12:dmx.c         **** 
+  13:dmx.c         **** 
+  14:dmx.c         **** // DMX timers for cable on/off glitches
+  15:dmx.c         **** extern uint16 uiDMXLossTimer;
+  16:dmx.c         **** extern uint16 uiDMXPresentTimer;
+  17:dmx.c         **** extern uint16 uiwDMXLossTimer;
+  18:dmx.c         **** extern uint16 uiwDMXPresentTimer;
+  19:dmx.c         **** //
+  20:dmx.c         **** extern structInfo Info;
+  21:dmx.c         **** extern structRDMPacket RDMResPacket;
+  22:dmx.c         **** extern structRDM RDM;
+  23:dmx.c         **** 
+  24:dmx.c         **** extern volatile uint8 byDMXGood;
+  25:dmx.c         **** extern volatile uint8 byDMXData[];
+  26:dmx.c         **** extern uint8 bySlaveUnitID;
+  27:dmx.c         **** 
+  28:dmx.c         **** 
+  29:dmx.c         **** //write a function to handle RDM response transmission
+  30:dmx.c         **** //note the optional break
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 2
+
+
+  31:dmx.c         **** void transmitResponse(const uint8 *data, uint8 length, uint8 isbreak)
+  32:dmx.c         **** {
+  28              		.loc 1 32 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 4, -16
+  36              		.cfi_offset 5, -12
+  37              		.cfi_offset 6, -8
+  38              		.cfi_offset 14, -4
+  39              		.loc 1 32 0
+  40 0002 1646     		mov	r6, r2
+  41 0004 0446     		mov	r4, r0
+  33:dmx.c         ****     DMX_Control_Reg_Write(0x02);
+  42              		.loc 1 33 0
+  43 0006 0220     		movs	r0, #2
+  44              	.LVL1:
+  32:dmx.c         ****     DMX_Control_Reg_Write(0x02);
+  45              		.loc 1 32 0
+  46 0008 0D46     		mov	r5, r1
+  47              		.loc 1 33 0
+  48 000a FFF7FEFF 		bl	DMX_Control_Reg_Write
+  49              	.LVL2:
+  34:dmx.c         ****         
+  35:dmx.c         **** 	if(isbreak)
+  50              		.loc 1 35 0
+  51 000e 2EB1     		cbz	r6, .L2
+  36:dmx.c         **** 	{
+  37:dmx.c         ****       	DMX_Control_Reg_Write(0x03);
+  52              		.loc 1 37 0
+  53 0010 0320     		movs	r0, #3
+  54 0012 FFF7FEFF 		bl	DMX_Control_Reg_Write
+  55              	.LVL3:
+  38:dmx.c         **** 		CyDelayUs(125);
+  56              		.loc 1 38 0
+  57 0016 7D20     		movs	r0, #125
+  58 0018 FFF7FEFF 		bl	CyDelayUs
+  59              	.LVL4:
+  60              	.L2:
+  39:dmx.c         **** 	}
+  40:dmx.c         **** 
+  41:dmx.c         **** 	DMX_Control_Reg_Write(0x02);
+  61              		.loc 1 41 0
+  62 001c 0220     		movs	r0, #2
+  63 001e FFF7FEFF 		bl	DMX_Control_Reg_Write
+  64              	.LVL5:
+  42:dmx.c         **** 	CyDelayUs(16);
+  65              		.loc 1 42 0
+  66 0022 1020     		movs	r0, #16
+  67 0024 FFF7FEFF 		bl	CyDelayUs
+  68              	.LVL6:
+  43:dmx.c         **** 
+  44:dmx.c         **** 	DMX_UART_PutArray(data, length);
+  69              		.loc 1 44 0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 3
+
+
+  70 0028 2946     		mov	r1, r5
+  71 002a 2046     		mov	r0, r4
+  72 002c FFF7FEFF 		bl	DMX_UART_PutArray
+  73              	.LVL7:
+  45:dmx.c         **** 	while (!(DMX_UART_TXSTATUS & DMX_UART_TX_STS_COMPLETE));
+  74              		.loc 1 45 0
+  75 0030 0648     		ldr	r0, .L10
+  76 0032 0749     		ldr	r1, .L10+4
+  77              	.L3:
+  78              		.loc 1 45 0 is_stmt 0 discriminator 1
+  79 0034 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+  80 0036 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+  81 0038 1A42     		tst	r2, r3
+  82 003a FBD0     		beq	.L3
+  46:dmx.c         **** 	CyDelayUs(8);
+  83              		.loc 1 46 0 is_stmt 1
+  84 003c 0820     		movs	r0, #8
+  85 003e FFF7FEFF 		bl	CyDelayUs
+  86              	.LVL8:
+  47:dmx.c         **** 
+  48:dmx.c         **** 	DMX_Control_Reg_Write(0x00);
+  49:dmx.c         **** }
+  87              		.loc 1 49 0
+  88 0042 BDE87040 		pop	{r4, r5, r6, lr}
+  89              		.cfi_restore 14
+  90              		.cfi_restore 6
+  91              		.cfi_restore 5
+  92              		.cfi_restore 4
+  93              		.cfi_def_cfa_offset 0
+  94              	.LVL9:
+  48:dmx.c         **** }
+  95              		.loc 1 48 0
+  96 0046 0020     		movs	r0, #0
+  97 0048 FFF7FEBF 		b	DMX_Control_Reg_Write
+  98              	.LVL10:
+  99              	.L11:
+ 100              		.align	2
+ 101              	.L10:
+ 102 004c 00000000 		.word	DMX_UART_TXSTATUS
+ 103 0050 00000000 		.word	DMX_UART_TX_STS_COMPLETE
+ 104              		.cfi_endproc
+ 105              	.LFE0:
+ 106              		.size	transmitResponse, .-transmitResponse
+ 107              		.section	.text.DMXRxISRHandler,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	DMXRxISRHandler
+ 110              		.thumb
+ 111              		.thumb_func
+ 112              		.type	DMXRxISRHandler, %function
+ 113              	DMXRxISRHandler:
+ 114              	.LFB1:
+  50:dmx.c         **** 
+  51:dmx.c         **** 
+  52:dmx.c         **** #define CHECK_FRAMES 4
+  53:dmx.c         **** #define DMX_BUFFER_LEN (NUMCHANNELS*2)
+  54:dmx.c         **** 
+  55:dmx.c         **** #define SC_DMX 0x00
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 4
+
+
+  56:dmx.c         **** #define SC_RDM 0xCC
+  57:dmx.c         **** 
+  58:dmx.c         **** // so that we can use the RDM routine for either port
+  59:dmx.c         **** void (*const PWM_ADIM_WriteCompare[NUMCHANNELS]) (uint16_t) = {PWM_ADIM_1_WriteCompare1, PWM_ADIM_1
+  60:dmx.c         ****                                                                PWM_BOTHDIM5_WriteCompare1, PWM_BOTH
+  61:dmx.c         **** 
+  62:dmx.c         **** CY_ISR(DMXRxISRHandler)
+  63:dmx.c         **** {
+ 115              		.loc 1 63 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 120              		.cfi_def_cfa_offset 24
+ 121              		.cfi_offset 4, -24
+ 122              		.cfi_offset 5, -20
+ 123              		.cfi_offset 6, -16
+ 124              		.cfi_offset 7, -12
+ 125              		.cfi_offset 8, -8
+ 126              		.cfi_offset 14, -4
+  64:dmx.c         **** 	static uint8 data_buffer[DMX_BUFFER_LEN] = {};
+  65:dmx.c         **** 	static size_t data_idx = 0;
+  66:dmx.c         **** 	
+  67:dmx.c         **** 	static enum {e_IDLE, e_START, e_DATA, e_RDM} state = e_IDLE;
+  68:dmx.c         **** 	if (DMX_UART_RXSTATUS & DMX_UART_RX_STS_STOP_ERROR) {
+ 127              		.loc 1 68 0
+ 128 0004 424B     		ldr	r3, .L40
+ 129 0006 434D     		ldr	r5, .L40+4
+ 130 0008 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 131 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 132 000c 1A42     		tst	r2, r3
+ 133 000e 03D1     		bne	.L36
+ 134              	.LBB2:
+  69:dmx.c         **** 		static uint16 check_frame[CHECK_FRAMES] = {};
+  70:dmx.c         **** 		static uint8 check_idx = 0;
+  71:dmx.c         **** 		
+  72:dmx.c         **** 		check_frame[check_idx++] = data_idx;
+  73:dmx.c         **** 		if (check_idx >= CHECK_FRAMES) check_idx = 0;
+  74:dmx.c         **** 		
+  75:dmx.c         **** 		bool check = true;
+  76:dmx.c         **** 		uint16 check_val = check_frame[0];
+  77:dmx.c         **** 		for (uint8 i=1; i<CHECK_FRAMES; i++) if (check_frame[i] != check_val)
+  78:dmx.c         **** 			check = false;
+  79:dmx.c         **** 		
+  80:dmx.c         **** 		if (check) 
+  81:dmx.c         ****         {
+  82:dmx.c         **** 			memcpy((uint8 *)byDMXData, data_buffer, (NUMCHANNELS*2));
+  83:dmx.c         **** 		    byDMXGood = true;
+  84:dmx.c         **** 		}
+  85:dmx.c         **** 		
+  86:dmx.c         **** 		data_idx = 0;
+  87:dmx.c         **** 		state = e_START;
+  88:dmx.c         **** 		DMX_UART_ClearRxBuffer();
+  89:dmx.c         **** 		RDM_ResetState();
+  90:dmx.c         **** 	} 
+  91:dmx.c         ****     else while (DMX_UART_RXSTATUS & DMX_UART_RX_STS_FIFO_NOTEMPTY) 
+  92:dmx.c         ****     {
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 5
+
+
+  93:dmx.c         **** 		uint8 data = DMX_UART_RXDATA;
+  94:dmx.c         **** 			
+  95:dmx.c         **** 		switch (state)
+ 135              		.loc 1 95 0
+ 136 0010 414C     		ldr	r4, .L40+8
+ 137              	.LBE2:
+  91:dmx.c         ****     {
+ 138              		.loc 1 91 0
+ 139 0012 424F     		ldr	r7, .L40+12
+ 140 0014 2646     		mov	r6, r4
+ 141 0016 3CE0     		b	.L13
+ 142              	.L36:
+ 143              	.LBB4:
+  72:dmx.c         **** 		if (check_idx >= CHECK_FRAMES) check_idx = 0;
+ 144              		.loc 1 72 0
+ 145 0018 3F4B     		ldr	r3, .L40+8
+ 146 001a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 147 001c D868     		ldr	r0, [r3, #12]
+ 148 001e 4A1C     		adds	r2, r1, #1
+ 149 0020 D2B2     		uxtb	r2, r2
+  73:dmx.c         **** 		
+ 150              		.loc 1 73 0
+ 151 0022 032A     		cmp	r2, #3
+  72:dmx.c         **** 		if (check_idx >= CHECK_FRAMES) check_idx = 0;
+ 152              		.loc 1 72 0
+ 153 0024 03EB4101 		add	r1, r3, r1, lsl #1
+ 154 0028 4880     		strh	r0, [r1, #2]	@ movhi
+ 155 002a 1A70     		strb	r2, [r3]
+  73:dmx.c         **** 		
+ 156              		.loc 1 73 0
+ 157 002c 88BF     		it	hi
+ 158 002e 0022     		movhi	r2, #0
+  76:dmx.c         **** 		for (uint8 i=1; i<CHECK_FRAMES; i++) if (check_frame[i] != check_val)
+ 159              		.loc 1 76 0
+ 160 0030 5988     		ldrh	r1, [r3, #2]
+  73:dmx.c         **** 		
+ 161              		.loc 1 73 0
+ 162 0032 88BF     		it	hi
+ 163 0034 1A70     		strbhi	r2, [r3]
+ 164              	.LVL11:
+ 165              	.LBB5:
+  77:dmx.c         **** 			check = false;
+ 166              		.loc 1 77 0
+ 167 0036 9A88     		ldrh	r2, [r3, #4]
+ 168 0038 501A     		subs	r0, r2, r1
+ 169 003a 4242     		rsbs	r2, r0, #0
+ 170 003c 4241     		adcs	r2, r2, r0
+ 171              	.LVL12:
+ 172 003e D888     		ldrh	r0, [r3, #6]
+  78:dmx.c         **** 		
+ 173              		.loc 1 78 0
+ 174 0040 8842     		cmp	r0, r1
+ 175 0042 18BF     		it	ne
+ 176 0044 0022     		movne	r2, #0
+ 177              	.LVL13:
+  77:dmx.c         **** 			check = false;
+ 178              		.loc 1 77 0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 6
+
+
+ 179 0046 1889     		ldrh	r0, [r3, #8]
+ 180 0048 8842     		cmp	r0, r1
+ 181 004a 0BD1     		bne	.L17
+ 182              	.LVL14:
+ 183              	.LBE5:
+  80:dmx.c         ****         {
+ 184              		.loc 1 80 0 discriminator 2
+ 185 004c 52B1     		cbz	r2, .L17
+ 186              	.LBB6:
+  82:dmx.c         **** 		    byDMXGood = true;
+ 187              		.loc 1 82 0
+ 188 004e 3448     		ldr	r0, .L40+16
+ 189 0050 3449     		ldr	r1, .L40+20
+ 190              	.LVL15:
+ 191 0052 0268     		ldr	r2, [r0]	@ unaligned
+ 192              	.LVL16:
+ 193 0054 0A60     		str	r2, [r1]	@ unaligned
+ 194 0056 4268     		ldr	r2, [r0, #4]	@ unaligned
+ 195 0058 4A60     		str	r2, [r1, #4]	@ unaligned
+ 196 005a 8268     		ldr	r2, [r0, #8]	@ unaligned
+ 197 005c 8A60     		str	r2, [r1, #8]	@ unaligned
+  83:dmx.c         **** 		}
+ 198              		.loc 1 83 0
+ 199 005e 324A     		ldr	r2, .L40+24
+ 200 0060 0121     		movs	r1, #1
+ 201 0062 1170     		strb	r1, [r2]
+ 202              	.LVL17:
+ 203              	.L17:
+ 204              	.LBE6:
+  86:dmx.c         **** 		state = e_START;
+ 205              		.loc 1 86 0
+ 206 0064 0022     		movs	r2, #0
+ 207 0066 DA60     		str	r2, [r3, #12]
+  87:dmx.c         **** 		DMX_UART_ClearRxBuffer();
+ 208              		.loc 1 87 0
+ 209 0068 0122     		movs	r2, #1
+ 210 006a 1A77     		strb	r2, [r3, #28]
+  88:dmx.c         **** 		RDM_ResetState();
+ 211              		.loc 1 88 0
+ 212 006c FFF7FEFF 		bl	DMX_UART_ClearRxBuffer
+ 213              	.LVL18:
+ 214              	.LBE4:
+  96:dmx.c         ****         {
+  97:dmx.c         **** 		    case e_IDLE:
+  98:dmx.c         ****             default:
+  99:dmx.c         ****             break;
+ 100:dmx.c         **** 			
+ 101:dmx.c         **** 		    case e_START:
+ 102:dmx.c         ****     			if (data == SC_DMX)
+ 103:dmx.c         ****                     state = e_DATA;
+ 104:dmx.c         ****     			else if (data == SC_RDM)
+ 105:dmx.c         ****                     state = e_RDM;
+ 106:dmx.c         ****     			else
+ 107:dmx.c         ****                     state = e_IDLE;
+ 108:dmx.c         **** 			break;
+ 109:dmx.c         **** 			
+ 110:dmx.c         ****     		case e_DATA:
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 7
+
+
+ 111:dmx.c         **** 	    		for (uint8 i=0; i<NUMCHANNELS; i++)
+ 112:dmx.c         ****                 {
+ 113:dmx.c         ****                     // 8 bit values
+ 114:dmx.c         ****                     if(RDM.stRDMPersonality == 1 || RDM.stRDMPersonality == 3)
+ 115:dmx.c         ****                     {
+ 116:dmx.c         ****                         if (Info.uiDMXChannel[i] == data_idx)
+ 117:dmx.c         ****                             data_buffer[i] = data;
+ 118:dmx.c         ****                     }
+ 119:dmx.c         ****                     // 16-bit values
+ 120:dmx.c         ****                     else
+ 121:dmx.c         ****                     {
+ 122:dmx.c         ****                         if (Info.uiDMXChannel[i] == data_idx) 
+ 123:dmx.c         ****                             data_buffer[i*2] = data;
+ 124:dmx.c         ****                         else if (Info.uiDMXChannel[i] + 1 == data_idx) 
+ 125:dmx.c         ****                             data_buffer[(i*2)+1] = data;
+ 126:dmx.c         ****                     }
+ 127:dmx.c         ****                 }
+ 128:dmx.c         **** 			break;
+ 129:dmx.c         **** 			
+ 130:dmx.c         ****     		case e_RDM:
+ 131:dmx.c         **** 	    		if (!IsSlave)
+ 132:dmx.c         ****                     RDM_AcceptByte(data);
+ 133:dmx.c         ****                 
+ 134:dmx.c         **** 			    uiDMXLossTimer = DMXLOSSTIME;
+ 135:dmx.c         **** 			break;
+ 136:dmx.c         **** 		}
+ 137:dmx.c         **** 		
+ 138:dmx.c         **** 		data_idx++;
+ 139:dmx.c         **** 	}
+ 140:dmx.c         **** }
+ 215              		.loc 1 140 0
+ 216 0070 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 217              		.cfi_remember_state
+ 218              		.cfi_restore 14
+ 219              		.cfi_restore 8
+ 220              		.cfi_restore 7
+ 221              		.cfi_restore 6
+ 222              		.cfi_restore 5
+ 223              		.cfi_restore 4
+ 224              		.cfi_def_cfa_offset 0
+ 225              	.LBB7:
+  89:dmx.c         **** 	} 
+ 226              		.loc 1 89 0
+ 227 0074 FFF7FEBF 		b	RDM_ResetState
+ 228              	.LVL19:
+ 229              	.L29:
+ 230              		.cfi_restore_state
+ 231              	.LBE7:
+ 232              	.LBB8:
+  93:dmx.c         **** 			
+ 233              		.loc 1 93 0
+ 234 0078 2C4B     		ldr	r3, .L40+28
+ 235 007a 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  95:dmx.c         ****         {
+ 236              		.loc 1 95 0
+ 237 007c 237F     		ldrb	r3, [r4, #28]	@ zero_extendqisi2
+  93:dmx.c         **** 			
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 8
+
+
+ 238              		.loc 1 93 0
+ 239 007e C0B2     		uxtb	r0, r0
+ 240              	.LVL20:
+  95:dmx.c         ****         {
+ 241              		.loc 1 95 0
+ 242 0080 022B     		cmp	r3, #2
+ 243 0082 15D0     		beq	.L19
+ 244 0084 032B     		cmp	r3, #3
+ 245 0086 37D0     		beq	.L20
+ 246 0088 012B     		cmp	r3, #1
+ 247 008a 07D0     		beq	.L38
+ 248              	.LVL21:
+ 249              	.L18:
+ 138:dmx.c         **** 	}
+ 250              		.loc 1 138 0
+ 251 008c F368     		ldr	r3, [r6, #12]
+ 252 008e 0133     		adds	r3, r3, #1
+ 253 0090 F360     		str	r3, [r6, #12]
+ 254              	.L13:
+ 255              	.LBE8:
+  91:dmx.c         ****     {
+ 256              		.loc 1 91 0
+ 257 0092 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 258 0094 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 259 0096 1A42     		tst	r2, r3
+ 260 0098 EED1     		bne	.L29
+ 261 009a 37E0     		b	.L39
+ 262              	.LVL22:
+ 263              	.L38:
+ 264              	.LBB9:
+ 102:dmx.c         ****                     state = e_DATA;
+ 265              		.loc 1 102 0
+ 266 009c 08B9     		cbnz	r0, .L22
+ 103:dmx.c         ****     			else if (data == SC_RDM)
+ 267              		.loc 1 103 0
+ 268 009e 0223     		movs	r3, #2
+ 269 00a0 02E0     		b	.L37
+ 270              	.L22:
+ 104:dmx.c         ****                     state = e_RDM;
+ 271              		.loc 1 104 0
+ 272 00a2 CC28     		cmp	r0, #204
+ 273 00a4 02D1     		bne	.L23
+ 105:dmx.c         ****     			else
+ 274              		.loc 1 105 0
+ 275 00a6 0323     		movs	r3, #3
+ 276              	.L37:
+ 277 00a8 2377     		strb	r3, [r4, #28]
+ 278 00aa EFE7     		b	.L18
+ 279              	.L23:
+ 107:dmx.c         **** 			break;
+ 280              		.loc 1 107 0
+ 281 00ac 0023     		movs	r3, #0
+ 282 00ae FBE7     		b	.L37
+ 283              	.L19:
+ 284              	.LBB3:
+ 114:dmx.c         ****                     {
+ 285              		.loc 1 114 0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 9
+
+
+ 286 00b0 1F4B     		ldr	r3, .L40+32
+ 116:dmx.c         ****                             data_buffer[i] = data;
+ 287              		.loc 1 116 0
+ 288 00b2 E168     		ldr	r1, [r4, #12]
+ 114:dmx.c         ****                     {
+ 289              		.loc 1 114 0
+ 290 00b4 93F808E0 		ldrb	lr, [r3, #8]	@ zero_extendqisi2
+ 291 00b8 DFF88080 		ldr	r8, .L40+44
+ 125:dmx.c         ****                     }
+ 292              		.loc 1 125 0
+ 293 00bc DFF860C0 		ldr	ip, .L40+16
+ 114:dmx.c         ****                     {
+ 294              		.loc 1 114 0
+ 295 00c0 0EF0FD0E 		and	lr, lr, #253
+ 116:dmx.c         ****                             data_buffer[i] = data;
+ 296              		.loc 1 116 0
+ 297 00c4 0023     		movs	r3, #0
+ 298              	.L27:
+ 299              	.LVL23:
+ 114:dmx.c         ****                     {
+ 300              		.loc 1 114 0
+ 301 00c6 BEF1010F 		cmp	lr, #1
+ 116:dmx.c         ****                             data_buffer[i] = data;
+ 302              		.loc 1 116 0
+ 303 00ca 38F81320 		ldrh	r2, [r8, r3, lsl #1]	@ unaligned
+ 114:dmx.c         ****                     {
+ 304              		.loc 1 114 0
+ 305 00ce 04D1     		bne	.L24
+ 116:dmx.c         ****                             data_buffer[i] = data;
+ 306              		.loc 1 116 0
+ 307 00d0 8A42     		cmp	r2, r1
+ 308 00d2 0DD1     		bne	.L25
+ 117:dmx.c         ****                     }
+ 309              		.loc 1 117 0
+ 310 00d4 03F80C00 		strb	r0, [r3, ip]
+ 311 00d8 0AE0     		b	.L25
+ 312              	.L24:
+ 122:dmx.c         ****                             data_buffer[i*2] = data;
+ 313              		.loc 1 122 0
+ 314 00da 8A42     		cmp	r2, r1
+ 315 00dc 02D1     		bne	.L26
+ 123:dmx.c         ****                         else if (Info.uiDMXChannel[i] + 1 == data_idx) 
+ 316              		.loc 1 123 0
+ 317 00de 0CF81300 		strb	r0, [ip, r3, lsl #1]
+ 318 00e2 05E0     		b	.L25
+ 319              	.L26:
+ 124:dmx.c         ****                             data_buffer[(i*2)+1] = data;
+ 320              		.loc 1 124 0
+ 321 00e4 0132     		adds	r2, r2, #1
+ 322 00e6 8A42     		cmp	r2, r1
+ 125:dmx.c         ****                     }
+ 323              		.loc 1 125 0
+ 324 00e8 04BF     		itt	eq
+ 325 00ea 0CEB4302 		addeq	r2, ip, r3, lsl #1
+ 326 00ee 5070     		strbeq	r0, [r2, #1]
+ 327              	.L25:
+ 328              	.LVL24:
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 10
+
+
+ 329 00f0 0133     		adds	r3, r3, #1
+ 330              	.LVL25:
+ 111:dmx.c         ****                 {
+ 331              		.loc 1 111 0 discriminator 2
+ 332 00f2 062B     		cmp	r3, #6
+ 333 00f4 E7D1     		bne	.L27
+ 334 00f6 C9E7     		b	.L18
+ 335              	.L20:
+ 336              	.LBE3:
+ 131:dmx.c         ****                     RDM_AcceptByte(data);
+ 337              		.loc 1 131 0
+ 338 00f8 0E4B     		ldr	r3, .L40+36
+ 339 00fa 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 340 00fc 0BB9     		cbnz	r3, .L28
+ 132:dmx.c         ****                 
+ 341              		.loc 1 132 0
+ 342 00fe FFF7FEFF 		bl	RDM_AcceptByte
+ 343              	.LVL26:
+ 344              	.L28:
+ 134:dmx.c         **** 			break;
+ 345              		.loc 1 134 0
+ 346 0102 0D4B     		ldr	r3, .L40+40
+ 347 0104 4FF4FA72 		mov	r2, #500
+ 348 0108 1A80     		strh	r2, [r3]	@ movhi
+ 135:dmx.c         **** 		}
+ 349              		.loc 1 135 0
+ 350 010a BFE7     		b	.L18
+ 351              	.L39:
+ 352              	.LBE9:
+ 353              		.loc 1 140 0
+ 354 010c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 355              	.L41:
+ 356              		.align	2
+ 357              	.L40:
+ 358 0110 00000000 		.word	DMX_UART_RX_STS_STOP_ERROR
+ 359 0114 00000000 		.word	DMX_UART_RXSTATUS
+ 360 0118 00000000 		.word	.LANCHOR0
+ 361 011c 00000000 		.word	DMX_UART_RX_STS_FIFO_NOTEMPTY
+ 362 0120 10000000 		.word	.LANCHOR0+16
+ 363 0124 00000000 		.word	byDMXData
+ 364 0128 00000000 		.word	byDMXGood
+ 365 012c 00000000 		.word	DMX_UART_RXDATA
+ 366 0130 00000000 		.word	RDM
+ 367 0134 00000000 		.word	IsSlave
+ 368 0138 00000000 		.word	uiDMXLossTimer
+ 369 013c 00000000 		.word	Info
+ 370              		.cfi_endproc
+ 371              	.LFE1:
+ 372              		.size	DMXRxISRHandler, .-DMXRxISRHandler
+ 373              		.global	PWM_ADIM_WriteCompare
+ 374              		.comm	DMX_UART_RXDATA,1,1
+ 375              		.comm	DMX_UART_RX_STS_FIFO_NOTEMPTY,1,1
+ 376              		.comm	DMX_UART_RX_STS_STOP_ERROR,1,1
+ 377              		.comm	DMX_UART_RXSTATUS,1,1
+ 378              		.comm	DMX_UART_TX_STS_COMPLETE,1,1
+ 379              		.comm	DMX_UART_TXSTATUS,1,1
+ 380              		.comm	IsSlave,1,1
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 11
+
+
+ 381              		.comm	isInTempFault,1,1
+ 382              		.comm	uiTempFaultCount,4,4
+ 383              		.comm	structeeprom,2,1
+ 384              		.section	.rodata
+ 385              		.align	2
+ 386              		.type	PWM_ADIM_WriteCompare, %object
+ 387              		.size	PWM_ADIM_WriteCompare, 24
+ 388              	PWM_ADIM_WriteCompare:
+ 389 0000 00000000 		.word	PWM_ADIM_1_WriteCompare1
+ 390 0004 00000000 		.word	PWM_ADIM_1_WriteCompare2
+ 391 0008 00000000 		.word	PWM_ADIM_2_WriteCompare1
+ 392 000c 00000000 		.word	PWM_ADIM_2_WriteCompare2
+ 393 0010 00000000 		.word	PWM_BOTHDIM5_WriteCompare1
+ 394 0014 00000000 		.word	PWM_BOTHDIM6_WriteCompare1
+ 395              		.bss
+ 396              		.align	2
+ 397              		.set	.LANCHOR0,. + 0
+ 398              		.type	check_idx.4580, %object
+ 399              		.size	check_idx.4580, 1
+ 400              	check_idx.4580:
+ 401 0000 00       		.space	1
+ 402 0001 00       		.space	1
+ 403              		.type	check_frame.4579, %object
+ 404              		.size	check_frame.4579, 8
+ 405              	check_frame.4579:
+ 406 0002 00000000 		.space	8
+ 406      00000000 
+ 407 000a 0000     		.space	2
+ 408              		.type	data_idx.4572, %object
+ 409              		.size	data_idx.4572, 4
+ 410              	data_idx.4572:
+ 411 000c 00000000 		.space	4
+ 412              		.type	data_buffer.4571, %object
+ 413              		.size	data_buffer.4571, 12
+ 414              	data_buffer.4571:
+ 415 0010 00000000 		.space	12
+ 415      00000000 
+ 415      00000000 
+ 416              		.type	state.4578, %object
+ 417              		.size	state.4578, 1
+ 418              	state.4578:
+ 419 001c 00       		.space	1
+ 420              		.text
+ 421              	.Letext0:
+ 422              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 423              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 424              		.file 4 "cytypes.h"
+ 425              		.file 5 "rdm.h"
+ 426              		.file 6 "main.h"
+ 427              		.file 7 "RDM_Header.h"
+ 428              		.file 8 "<built-in>"
+ 429              		.section	.debug_info,"",%progbits
+ 430              	.Ldebug_info0:
+ 431 0000 3C060000 		.4byte	0x63c
+ 432 0004 0400     		.2byte	0x4
+ 433 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 434 000a 04       		.byte	0x4
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 12
+
+
+ 435 000b 01       		.uleb128 0x1
+ 436 000c 99000000 		.4byte	.LASF83
+ 437 0010 0C       		.byte	0xc
+ 438 0011 9A040000 		.4byte	.LASF84
+ 439 0015 AD010000 		.4byte	.LASF85
+ 440 0019 38000000 		.4byte	.Ldebug_ranges0+0x38
+ 441 001d 00000000 		.4byte	0
+ 442 0021 00000000 		.4byte	.Ldebug_line0
+ 443 0025 02       		.uleb128 0x2
+ 444 0026 01       		.byte	0x1
+ 445 0027 06       		.byte	0x6
+ 446 0028 8D000000 		.4byte	.LASF0
+ 447 002c 02       		.uleb128 0x2
+ 448 002d 01       		.byte	0x1
+ 449 002e 08       		.byte	0x8
+ 450 002f B6030000 		.4byte	.LASF1
+ 451 0033 02       		.uleb128 0x2
+ 452 0034 02       		.byte	0x2
+ 453 0035 05       		.byte	0x5
+ 454 0036 C4030000 		.4byte	.LASF2
+ 455 003a 03       		.uleb128 0x3
+ 456 003b 1E040000 		.4byte	.LASF9
+ 457 003f 02       		.byte	0x2
+ 458 0040 2B       		.byte	0x2b
+ 459 0041 45000000 		.4byte	0x45
+ 460 0045 02       		.uleb128 0x2
+ 461 0046 02       		.byte	0x2
+ 462 0047 07       		.byte	0x7
+ 463 0048 95020000 		.4byte	.LASF3
+ 464 004c 02       		.uleb128 0x2
+ 465 004d 04       		.byte	0x4
+ 466 004e 05       		.byte	0x5
+ 467 004f 4E010000 		.4byte	.LASF4
+ 468 0053 02       		.uleb128 0x2
+ 469 0054 04       		.byte	0x4
+ 470 0055 07       		.byte	0x7
+ 471 0056 44020000 		.4byte	.LASF5
+ 472 005a 02       		.uleb128 0x2
+ 473 005b 08       		.byte	0x8
+ 474 005c 05       		.byte	0x5
+ 475 005d 7F000000 		.4byte	.LASF6
+ 476 0061 02       		.uleb128 0x2
+ 477 0062 08       		.byte	0x8
+ 478 0063 07       		.byte	0x7
+ 479 0064 25000000 		.4byte	.LASF7
+ 480 0068 04       		.uleb128 0x4
+ 481 0069 04       		.byte	0x4
+ 482 006a 05       		.byte	0x5
+ 483 006b 696E7400 		.ascii	"int\000"
+ 484 006f 02       		.uleb128 0x2
+ 485 0070 04       		.byte	0x4
+ 486 0071 07       		.byte	0x7
+ 487 0072 2D020000 		.4byte	.LASF8
+ 488 0076 03       		.uleb128 0x3
+ 489 0077 A4010000 		.4byte	.LASF10
+ 490 007b 03       		.byte	0x3
+ 491 007c 24       		.byte	0x24
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 13
+
+
+ 492 007d 3A000000 		.4byte	0x3a
+ 493 0081 05       		.uleb128 0x5
+ 494 0082 8D010000 		.4byte	.LASF11
+ 495 0086 04       		.byte	0x4
+ 496 0087 9401     		.2byte	0x194
+ 497 0089 2C000000 		.4byte	0x2c
+ 498 008d 05       		.uleb128 0x5
+ 499 008e 00000000 		.4byte	.LASF12
+ 500 0092 04       		.byte	0x4
+ 501 0093 9501     		.2byte	0x195
+ 502 0095 45000000 		.4byte	0x45
+ 503 0099 05       		.uleb128 0x5
+ 504 009a 09020000 		.4byte	.LASF13
+ 505 009e 04       		.byte	0x4
+ 506 009f 9601     		.2byte	0x196
+ 507 00a1 53000000 		.4byte	0x53
+ 508 00a5 02       		.uleb128 0x2
+ 509 00a6 04       		.byte	0x4
+ 510 00a7 04       		.byte	0x4
+ 511 00a8 5A030000 		.4byte	.LASF14
+ 512 00ac 02       		.uleb128 0x2
+ 513 00ad 08       		.byte	0x8
+ 514 00ae 04       		.byte	0x4
+ 515 00af 00050000 		.4byte	.LASF15
+ 516 00b3 02       		.uleb128 0x2
+ 517 00b4 01       		.byte	0x1
+ 518 00b5 08       		.byte	0x8
+ 519 00b6 0D040000 		.4byte	.LASF16
+ 520 00ba 05       		.uleb128 0x5
+ 521 00bb A3030000 		.4byte	.LASF17
+ 522 00bf 04       		.byte	0x4
+ 523 00c0 3E02     		.2byte	0x23e
+ 524 00c2 C6000000 		.4byte	0xc6
+ 525 00c6 06       		.uleb128 0x6
+ 526 00c7 81000000 		.4byte	0x81
+ 527 00cb 07       		.uleb128 0x7
+ 528 00cc 81000000 		.4byte	0x81
+ 529 00d0 DB000000 		.4byte	0xdb
+ 530 00d4 08       		.uleb128 0x8
+ 531 00d5 DB000000 		.4byte	0xdb
+ 532 00d9 05       		.byte	0x5
+ 533 00da 00       		.byte	0
+ 534 00db 02       		.uleb128 0x2
+ 535 00dc 04       		.byte	0x4
+ 536 00dd 07       		.byte	0x7
+ 537 00de 06030000 		.4byte	.LASF18
+ 538 00e2 09       		.uleb128 0x9
+ 539 00e3 6A       		.byte	0x6a
+ 540 00e4 05       		.byte	0x5
+ 541 00e5 32       		.byte	0x32
+ 542 00e6 3F010000 		.4byte	0x13f
+ 543 00ea 0A       		.uleb128 0xa
+ 544 00eb 35040000 		.4byte	.LASF19
+ 545 00ef 05       		.byte	0x5
+ 546 00f0 33       		.byte	0x33
+ 547 00f1 CB000000 		.4byte	0xcb
+ 548 00f5 00       		.byte	0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 14
+
+
+ 549 00f6 0A       		.uleb128 0xa
+ 550 00f7 E7030000 		.4byte	.LASF20
+ 551 00fb 05       		.byte	0x5
+ 552 00fc 34       		.byte	0x34
+ 553 00fd 8D000000 		.4byte	0x8d
+ 554 0101 06       		.byte	0x6
+ 555 0102 0A       		.uleb128 0xa
+ 556 0103 93010000 		.4byte	.LASF21
+ 557 0107 05       		.byte	0x5
+ 558 0108 35       		.byte	0x35
+ 559 0109 81000000 		.4byte	0x81
+ 560 010d 08       		.byte	0x8
+ 561 010e 0A       		.uleb128 0xa
+ 562 010f CD040000 		.4byte	.LASF22
+ 563 0113 05       		.byte	0x5
+ 564 0114 36       		.byte	0x36
+ 565 0115 3F010000 		.4byte	0x13f
+ 566 0119 09       		.byte	0x9
+ 567 011a 0A       		.uleb128 0xa
+ 568 011b 7B010000 		.4byte	.LASF23
+ 569 011f 05       		.byte	0x5
+ 570 0120 37       		.byte	0x37
+ 571 0121 3F010000 		.4byte	0x13f
+ 572 0125 2A       		.byte	0x2a
+ 573 0126 0A       		.uleb128 0xa
+ 574 0127 C2040000 		.4byte	.LASF24
+ 575 012b 05       		.byte	0x5
+ 576 012c 38       		.byte	0x38
+ 577 012d 4F010000 		.4byte	0x14f
+ 578 0131 4B       		.byte	0x4b
+ 579 0132 0A       		.uleb128 0xa
+ 580 0133 58000000 		.4byte	.LASF25
+ 581 0137 05       		.byte	0x5
+ 582 0138 39       		.byte	0x39
+ 583 0139 81000000 		.4byte	0x81
+ 584 013d 69       		.byte	0x69
+ 585 013e 00       		.byte	0
+ 586 013f 07       		.uleb128 0x7
+ 587 0140 81000000 		.4byte	0x81
+ 588 0144 4F010000 		.4byte	0x14f
+ 589 0148 08       		.uleb128 0x8
+ 590 0149 DB000000 		.4byte	0xdb
+ 591 014d 20       		.byte	0x20
+ 592 014e 00       		.byte	0
+ 593 014f 07       		.uleb128 0x7
+ 594 0150 81000000 		.4byte	0x81
+ 595 0154 5F010000 		.4byte	0x15f
+ 596 0158 08       		.uleb128 0x8
+ 597 0159 DB000000 		.4byte	0xdb
+ 598 015d 1D       		.byte	0x1d
+ 599 015e 00       		.byte	0
+ 600 015f 03       		.uleb128 0x3
+ 601 0160 39010000 		.4byte	.LASF26
+ 602 0164 05       		.byte	0x5
+ 603 0165 3A       		.byte	0x3a
+ 604 0166 E2000000 		.4byte	0xe2
+ 605 016a 07       		.uleb128 0x7
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 15
+
+
+ 606 016b 81000000 		.4byte	0x81
+ 607 016f 7A010000 		.4byte	0x17a
+ 608 0173 08       		.uleb128 0x8
+ 609 0174 DB000000 		.4byte	0xdb
+ 610 0178 0B       		.byte	0xb
+ 611 0179 00       		.byte	0
+ 612 017a 0B       		.uleb128 0xb
+ 613 017b 81000000 		.4byte	0x81
+ 614 017f 02       		.uleb128 0x2
+ 615 0180 01       		.byte	0x1
+ 616 0181 02       		.byte	0x2
+ 617 0182 B0030000 		.4byte	.LASF27
+ 618 0186 03       		.uleb128 0x3
+ 619 0187 28020000 		.4byte	.LASF28
+ 620 018b 06       		.byte	0x6
+ 621 018c 1B       		.byte	0x1b
+ 622 018d 81000000 		.4byte	0x81
+ 623 0191 07       		.uleb128 0x7
+ 624 0192 8D000000 		.4byte	0x8d
+ 625 0196 A1010000 		.4byte	0x1a1
+ 626 019a 08       		.uleb128 0x8
+ 627 019b DB000000 		.4byte	0xdb
+ 628 019f 05       		.byte	0x5
+ 629 01a0 00       		.byte	0
+ 630 01a1 09       		.uleb128 0x9
+ 631 01a2 3E       		.byte	0x3e
+ 632 01a3 06       		.byte	0x6
+ 633 01a4 E7       		.byte	0xe7
+ 634 01a5 54020000 		.4byte	0x254
+ 635 01a9 0A       		.uleb128 0xa
+ 636 01aa 87030000 		.4byte	.LASF29
+ 637 01ae 06       		.byte	0x6
+ 638 01af EA       		.byte	0xea
+ 639 01b0 91010000 		.4byte	0x191
+ 640 01b4 00       		.byte	0
+ 641 01b5 0A       		.uleb128 0xa
+ 642 01b6 A8020000 		.4byte	.LASF30
+ 643 01ba 06       		.byte	0x6
+ 644 01bb EB       		.byte	0xeb
+ 645 01bc 91010000 		.4byte	0x191
+ 646 01c0 0C       		.byte	0xc
+ 647 01c1 0A       		.uleb128 0xa
+ 648 01c2 0E000000 		.4byte	.LASF31
+ 649 01c6 06       		.byte	0x6
+ 650 01c7 EC       		.byte	0xec
+ 651 01c8 8D000000 		.4byte	0x8d
+ 652 01cc 18       		.byte	0x18
+ 653 01cd 0A       		.uleb128 0xa
+ 654 01ce 56020000 		.4byte	.LASF32
+ 655 01d2 06       		.byte	0x6
+ 656 01d3 ED       		.byte	0xed
+ 657 01d4 81000000 		.4byte	0x81
+ 658 01d8 1A       		.byte	0x1a
+ 659 01d9 0A       		.uleb128 0xa
+ 660 01da 12040000 		.4byte	.LASF33
+ 661 01de 06       		.byte	0x6
+ 662 01df EE       		.byte	0xee
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 16
+
+
+ 663 01e0 81000000 		.4byte	0x81
+ 664 01e4 1B       		.byte	0x1b
+ 665 01e5 0A       		.uleb128 0xa
+ 666 01e6 CC020000 		.4byte	.LASF34
+ 667 01ea 06       		.byte	0x6
+ 668 01eb F1       		.byte	0xf1
+ 669 01ec 8D000000 		.4byte	0x8d
+ 670 01f0 1C       		.byte	0x1c
+ 671 01f1 0A       		.uleb128 0xa
+ 672 01f2 B0040000 		.4byte	.LASF35
+ 673 01f6 06       		.byte	0x6
+ 674 01f7 F3       		.byte	0xf3
+ 675 01f8 A5000000 		.4byte	0xa5
+ 676 01fc 1E       		.byte	0x1e
+ 677 01fd 0A       		.uleb128 0xa
+ 678 01fe 6E010000 		.4byte	.LASF36
+ 679 0202 06       		.byte	0x6
+ 680 0203 F4       		.byte	0xf4
+ 681 0204 A5000000 		.4byte	0xa5
+ 682 0208 22       		.byte	0x22
+ 683 0209 0A       		.uleb128 0xa
+ 684 020a 0F030000 		.4byte	.LASF37
+ 685 020e 06       		.byte	0x6
+ 686 020f F5       		.byte	0xf5
+ 687 0210 A5000000 		.4byte	0xa5
+ 688 0214 26       		.byte	0x26
+ 689 0215 0A       		.uleb128 0xa
+ 690 0216 7C020000 		.4byte	.LASF38
+ 691 021a 06       		.byte	0x6
+ 692 021b F6       		.byte	0xf6
+ 693 021c 8D000000 		.4byte	0x8d
+ 694 0220 2A       		.byte	0x2a
+ 695 0221 0A       		.uleb128 0xa
+ 696 0222 29040000 		.4byte	.LASF39
+ 697 0226 06       		.byte	0x6
+ 698 0227 F8       		.byte	0xf8
+ 699 0228 99000000 		.4byte	0x99
+ 700 022c 2C       		.byte	0x2c
+ 701 022d 0A       		.uleb128 0xa
+ 702 022e 3F040000 		.4byte	.LASF40
+ 703 0232 06       		.byte	0x6
+ 704 0233 FA       		.byte	0xfa
+ 705 0234 91010000 		.4byte	0x191
+ 706 0238 30       		.byte	0x30
+ 707 0239 0C       		.uleb128 0xc
+ 708 023a 60030000 		.4byte	.LASF41
+ 709 023e 06       		.byte	0x6
+ 710 023f 0201     		.2byte	0x102
+ 711 0241 86010000 		.4byte	0x186
+ 712 0245 3C       		.byte	0x3c
+ 713 0246 0C       		.uleb128 0xc
+ 714 0247 6E030000 		.4byte	.LASF42
+ 715 024b 06       		.byte	0x6
+ 716 024c 0301     		.2byte	0x103
+ 717 024e 86010000 		.4byte	0x186
+ 718 0252 3D       		.byte	0x3d
+ 719 0253 00       		.byte	0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 17
+
+
+ 720 0254 05       		.uleb128 0x5
+ 721 0255 7C030000 		.4byte	.LASF43
+ 722 0259 06       		.byte	0x6
+ 723 025a 0401     		.2byte	0x104
+ 724 025c A1010000 		.4byte	0x1a1
+ 725 0260 0D       		.uleb128 0xd
+ 726 0261 02       		.byte	0x2
+ 727 0262 06       		.byte	0x6
+ 728 0263 1301     		.2byte	0x113
+ 729 0265 77020000 		.4byte	0x277
+ 730 0269 0C       		.uleb128 0xc
+ 731 026a 3C000000 		.4byte	.LASF44
+ 732 026e 06       		.byte	0x6
+ 733 026f 1501     		.2byte	0x115
+ 734 0271 8D000000 		.4byte	0x8d
+ 735 0275 00       		.byte	0
+ 736 0276 00       		.byte	0
+ 737 0277 03       		.uleb128 0x3
+ 738 0278 07000000 		.4byte	.LASF45
+ 739 027c 07       		.byte	0x7
+ 740 027d 2B       		.byte	0x2b
+ 741 027e 6F000000 		.4byte	0x6f
+ 742 0282 0E       		.uleb128 0xe
+ 743 0283 F5020000 		.4byte	.LASF49
+ 744 0287 01       		.byte	0x1
+ 745 0288 1F       		.byte	0x1f
+ 746 0289 00000000 		.4byte	.LFB0
+ 747 028d 54000000 		.4byte	.LFE0-.LFB0
+ 748 0291 01       		.uleb128 0x1
+ 749 0292 9C       		.byte	0x9c
+ 750 0293 61030000 		.4byte	0x361
+ 751 0297 0F       		.uleb128 0xf
+ 752 0298 90020000 		.4byte	.LASF46
+ 753 029c 01       		.byte	0x1
+ 754 029d 1F       		.byte	0x1f
+ 755 029e 61030000 		.4byte	0x361
+ 756 02a2 00000000 		.4byte	.LLST0
+ 757 02a6 0F       		.uleb128 0xf
+ 758 02a7 06040000 		.4byte	.LASF47
+ 759 02ab 01       		.byte	0x1
+ 760 02ac 1F       		.byte	0x1f
+ 761 02ad 81000000 		.4byte	0x81
+ 762 02b1 2C000000 		.4byte	.LLST1
+ 763 02b5 0F       		.uleb128 0xf
+ 764 02b6 A8030000 		.4byte	.LASF48
+ 765 02ba 01       		.byte	0x1
+ 766 02bb 1F       		.byte	0x1f
+ 767 02bc 81000000 		.4byte	0x81
+ 768 02c0 4D000000 		.4byte	.LLST2
+ 769 02c4 10       		.uleb128 0x10
+ 770 02c5 0E000000 		.4byte	.LVL2
+ 771 02c9 FD050000 		.4byte	0x5fd
+ 772 02cd D7020000 		.4byte	0x2d7
+ 773 02d1 11       		.uleb128 0x11
+ 774 02d2 01       		.uleb128 0x1
+ 775 02d3 50       		.byte	0x50
+ 776 02d4 01       		.uleb128 0x1
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 18
+
+
+ 777 02d5 32       		.byte	0x32
+ 778 02d6 00       		.byte	0
+ 779 02d7 10       		.uleb128 0x10
+ 780 02d8 16000000 		.4byte	.LVL3
+ 781 02dc FD050000 		.4byte	0x5fd
+ 782 02e0 EA020000 		.4byte	0x2ea
+ 783 02e4 11       		.uleb128 0x11
+ 784 02e5 01       		.uleb128 0x1
+ 785 02e6 50       		.byte	0x50
+ 786 02e7 01       		.uleb128 0x1
+ 787 02e8 33       		.byte	0x33
+ 788 02e9 00       		.byte	0
+ 789 02ea 10       		.uleb128 0x10
+ 790 02eb 1C000000 		.4byte	.LVL4
+ 791 02ef 08060000 		.4byte	0x608
+ 792 02f3 FE020000 		.4byte	0x2fe
+ 793 02f7 11       		.uleb128 0x11
+ 794 02f8 01       		.uleb128 0x1
+ 795 02f9 50       		.byte	0x50
+ 796 02fa 02       		.uleb128 0x2
+ 797 02fb 08       		.byte	0x8
+ 798 02fc 7D       		.byte	0x7d
+ 799 02fd 00       		.byte	0
+ 800 02fe 10       		.uleb128 0x10
+ 801 02ff 22000000 		.4byte	.LVL5
+ 802 0303 FD050000 		.4byte	0x5fd
+ 803 0307 11030000 		.4byte	0x311
+ 804 030b 11       		.uleb128 0x11
+ 805 030c 01       		.uleb128 0x1
+ 806 030d 50       		.byte	0x50
+ 807 030e 01       		.uleb128 0x1
+ 808 030f 32       		.byte	0x32
+ 809 0310 00       		.byte	0
+ 810 0311 10       		.uleb128 0x10
+ 811 0312 28000000 		.4byte	.LVL6
+ 812 0316 08060000 		.4byte	0x608
+ 813 031a 24030000 		.4byte	0x324
+ 814 031e 11       		.uleb128 0x11
+ 815 031f 01       		.uleb128 0x1
+ 816 0320 50       		.byte	0x50
+ 817 0321 01       		.uleb128 0x1
+ 818 0322 40       		.byte	0x40
+ 819 0323 00       		.byte	0
+ 820 0324 10       		.uleb128 0x10
+ 821 0325 30000000 		.4byte	.LVL7
+ 822 0329 13060000 		.4byte	0x613
+ 823 032d 3E030000 		.4byte	0x33e
+ 824 0331 11       		.uleb128 0x11
+ 825 0332 01       		.uleb128 0x1
+ 826 0333 50       		.byte	0x50
+ 827 0334 02       		.uleb128 0x2
+ 828 0335 74       		.byte	0x74
+ 829 0336 00       		.sleb128 0
+ 830 0337 11       		.uleb128 0x11
+ 831 0338 01       		.uleb128 0x1
+ 832 0339 51       		.byte	0x51
+ 833 033a 02       		.uleb128 0x2
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 19
+
+
+ 834 033b 75       		.byte	0x75
+ 835 033c 00       		.sleb128 0
+ 836 033d 00       		.byte	0
+ 837 033e 10       		.uleb128 0x10
+ 838 033f 42000000 		.4byte	.LVL8
+ 839 0343 08060000 		.4byte	0x608
+ 840 0347 51030000 		.4byte	0x351
+ 841 034b 11       		.uleb128 0x11
+ 842 034c 01       		.uleb128 0x1
+ 843 034d 50       		.byte	0x50
+ 844 034e 01       		.uleb128 0x1
+ 845 034f 38       		.byte	0x38
+ 846 0350 00       		.byte	0
+ 847 0351 12       		.uleb128 0x12
+ 848 0352 4C000000 		.4byte	.LVL10
+ 849 0356 FD050000 		.4byte	0x5fd
+ 850 035a 11       		.uleb128 0x11
+ 851 035b 01       		.uleb128 0x1
+ 852 035c 50       		.byte	0x50
+ 853 035d 01       		.uleb128 0x1
+ 854 035e 30       		.byte	0x30
+ 855 035f 00       		.byte	0
+ 856 0360 00       		.byte	0
+ 857 0361 13       		.uleb128 0x13
+ 858 0362 04       		.byte	0x4
+ 859 0363 7A010000 		.4byte	0x17a
+ 860 0367 0E       		.uleb128 0xe
+ 861 0368 18020000 		.4byte	.LASF50
+ 862 036c 01       		.byte	0x1
+ 863 036d 3E       		.byte	0x3e
+ 864 036e 00000000 		.4byte	.LFB1
+ 865 0372 40010000 		.4byte	.LFE1-.LFB1
+ 866 0376 01       		.uleb128 0x1
+ 867 0377 9C       		.byte	0x9c
+ 868 0378 AE040000 		.4byte	0x4ae
+ 869 037c 14       		.uleb128 0x14
+ 870 037d 4C000000 		.4byte	.LASF51
+ 871 0381 01       		.byte	0x1
+ 872 0382 40       		.byte	0x40
+ 873 0383 6A010000 		.4byte	0x16a
+ 874 0387 05       		.uleb128 0x5
+ 875 0388 03       		.byte	0x3
+ 876 0389 10000000 		.4byte	data_buffer.4571
+ 877 038d 14       		.uleb128 0x14
+ 878 038e 60000000 		.4byte	.LASF52
+ 879 0392 01       		.byte	0x1
+ 880 0393 41       		.byte	0x41
+ 881 0394 77020000 		.4byte	0x277
+ 882 0398 05       		.uleb128 0x5
+ 883 0399 03       		.byte	0x3
+ 884 039a 0C000000 		.4byte	data_idx.4572
+ 885 039e 15       		.uleb128 0x15
+ 886 039f 01       		.byte	0x1
+ 887 03a0 2C000000 		.4byte	0x2c
+ 888 03a4 01       		.byte	0x1
+ 889 03a5 43       		.byte	0x43
+ 890 03a6 C3030000 		.4byte	0x3c3
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 20
+
+
+ 891 03aa 16       		.uleb128 0x16
+ 892 03ab 53030000 		.4byte	.LASF53
+ 893 03af 00       		.byte	0
+ 894 03b0 16       		.uleb128 0x16
+ 895 03b1 88020000 		.4byte	.LASF54
+ 896 03b5 01       		.byte	0x1
+ 897 03b6 16       		.uleb128 0x16
+ 898 03b7 F9030000 		.4byte	.LASF55
+ 899 03bb 02       		.byte	0x2
+ 900 03bc 16       		.uleb128 0x16
+ 901 03bd 00040000 		.4byte	.LASF56
+ 902 03c1 03       		.byte	0x3
+ 903 03c2 00       		.byte	0
+ 904 03c3 14       		.uleb128 0x14
+ 905 03c4 48010000 		.4byte	.LASF57
+ 906 03c8 01       		.byte	0x1
+ 907 03c9 43       		.byte	0x43
+ 908 03ca 9E030000 		.4byte	0x39e
+ 909 03ce 05       		.uleb128 0x5
+ 910 03cf 03       		.byte	0x3
+ 911 03d0 1C000000 		.4byte	state.4578
+ 912 03d4 17       		.uleb128 0x17
+ 913 03d5 00000000 		.4byte	.Ldebug_ranges0+0
+ 914 03d9 11040000 		.4byte	0x411
+ 915 03dd 18       		.uleb128 0x18
+ 916 03de 90020000 		.4byte	.LASF46
+ 917 03e2 01       		.byte	0x1
+ 918 03e3 5D       		.byte	0x5d
+ 919 03e4 81000000 		.4byte	0x81
+ 920 03e8 6E000000 		.4byte	.LLST3
+ 921 03ec 19       		.uleb128 0x19
+ 922 03ed B0000000 		.4byte	.LBB3
+ 923 03f1 48000000 		.4byte	.LBE3-.LBB3
+ 924 03f5 07040000 		.4byte	0x407
+ 925 03f9 1A       		.uleb128 0x1a
+ 926 03fa 6900     		.ascii	"i\000"
+ 927 03fc 01       		.byte	0x1
+ 928 03fd 6F       		.byte	0x6f
+ 929 03fe 81000000 		.4byte	0x81
+ 930 0402 8C000000 		.4byte	.LLST4
+ 931 0406 00       		.byte	0
+ 932 0407 1B       		.uleb128 0x1b
+ 933 0408 02010000 		.4byte	.LVL26
+ 934 040c 1E060000 		.4byte	0x61e
+ 935 0410 00       		.byte	0
+ 936 0411 1C       		.uleb128 0x1c
+ 937 0412 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 938 0416 14       		.uleb128 0x14
+ 939 0417 28030000 		.4byte	.LASF58
+ 940 041b 01       		.byte	0x1
+ 941 041c 45       		.byte	0x45
+ 942 041d AE040000 		.4byte	0x4ae
+ 943 0421 05       		.uleb128 0x5
+ 944 0422 03       		.byte	0x3
+ 945 0423 02000000 		.4byte	check_frame.4579
+ 946 0427 14       		.uleb128 0x14
+ 947 0428 3A020000 		.4byte	.LASF59
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 21
+
+
+ 948 042c 01       		.byte	0x1
+ 949 042d 46       		.byte	0x46
+ 950 042e 81000000 		.4byte	0x81
+ 951 0432 05       		.uleb128 0x5
+ 952 0433 03       		.byte	0x3
+ 953 0434 00000000 		.4byte	check_idx.4580
+ 954 0438 18       		.uleb128 0x18
+ 955 0439 68010000 		.4byte	.LASF60
+ 956 043d 01       		.byte	0x1
+ 957 043e 4B       		.byte	0x4b
+ 958 043f 7F010000 		.4byte	0x17f
+ 959 0443 AC000000 		.4byte	.LLST5
+ 960 0447 18       		.uleb128 0x18
+ 961 0448 55040000 		.4byte	.LASF61
+ 962 044c 01       		.byte	0x1
+ 963 044d 4C       		.byte	0x4c
+ 964 044e 8D000000 		.4byte	0x8d
+ 965 0452 0C010000 		.4byte	.LLST6
+ 966 0456 19       		.uleb128 0x19
+ 967 0457 36000000 		.4byte	.LBB5
+ 968 045b 16000000 		.4byte	.LBE5-.LBB5
+ 969 045f 71040000 		.4byte	0x471
+ 970 0463 1A       		.uleb128 0x1a
+ 971 0464 6900     		.ascii	"i\000"
+ 972 0466 01       		.byte	0x1
+ 973 0467 4D       		.byte	0x4d
+ 974 0468 81000000 		.4byte	0x81
+ 975 046c 2E010000 		.4byte	.LLST7
+ 976 0470 00       		.byte	0
+ 977 0471 19       		.uleb128 0x19
+ 978 0472 4E000000 		.4byte	.LBB6
+ 979 0476 16000000 		.4byte	.LBE6-.LBB6
+ 980 047a 9A040000 		.4byte	0x49a
+ 981 047e 1D       		.uleb128 0x1d
+ 982 047f 4E040000 		.4byte	.LASF86
+ 983 0483 08       		.byte	0x8
+ 984 0484 00       		.byte	0
+ 985 0485 BE040000 		.4byte	0x4be
+ 986 0489 1E       		.uleb128 0x1e
+ 987 048a BE040000 		.4byte	0x4be
+ 988 048e 1E       		.uleb128 0x1e
+ 989 048f C0040000 		.4byte	0x4c0
+ 990 0493 1E       		.uleb128 0x1e
+ 991 0494 6F000000 		.4byte	0x6f
+ 992 0498 00       		.byte	0
+ 993 0499 00       		.byte	0
+ 994 049a 1B       		.uleb128 0x1b
+ 995 049b 70000000 		.4byte	.LVL18
+ 996 049f 29060000 		.4byte	0x629
+ 997 04a3 1F       		.uleb128 0x1f
+ 998 04a4 78000000 		.4byte	.LVL19
+ 999 04a8 34060000 		.4byte	0x634
+ 1000 04ac 00       		.byte	0
+ 1001 04ad 00       		.byte	0
+ 1002 04ae 07       		.uleb128 0x7
+ 1003 04af 8D000000 		.4byte	0x8d
+ 1004 04b3 BE040000 		.4byte	0x4be
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 22
+
+
+ 1005 04b7 08       		.uleb128 0x8
+ 1006 04b8 DB000000 		.4byte	0xdb
+ 1007 04bc 03       		.byte	0x3
+ 1008 04bd 00       		.byte	0
+ 1009 04be 20       		.uleb128 0x20
+ 1010 04bf 04       		.byte	0x4
+ 1011 04c0 13       		.uleb128 0x13
+ 1012 04c1 04       		.byte	0x4
+ 1013 04c2 C6040000 		.4byte	0x4c6
+ 1014 04c6 21       		.uleb128 0x21
+ 1015 04c7 22       		.uleb128 0x22
+ 1016 04c8 34030000 		.4byte	.LASF62
+ 1017 04cc 06       		.byte	0x6
+ 1018 04cd 1601     		.2byte	0x116
+ 1019 04cf D9040000 		.4byte	0x4d9
+ 1020 04d3 05       		.uleb128 0x5
+ 1021 04d4 03       		.byte	0x3
+ 1022 04d5 00000000 		.4byte	structeeprom
+ 1023 04d9 0B       		.uleb128 0xb
+ 1024 04da 60020000 		.4byte	0x260
+ 1025 04de 22       		.uleb128 0x22
+ 1026 04df 57010000 		.4byte	.LASF63
+ 1027 04e3 06       		.byte	0x6
+ 1028 04e4 2201     		.2byte	0x122
+ 1029 04e6 99000000 		.4byte	0x99
+ 1030 04ea 05       		.uleb128 0x5
+ 1031 04eb 03       		.byte	0x3
+ 1032 04ec 00000000 		.4byte	uiTempFaultCount
+ 1033 04f0 22       		.uleb128 0x22
+ 1034 04f1 7A040000 		.4byte	.LASF64
+ 1035 04f5 06       		.byte	0x6
+ 1036 04f6 2301     		.2byte	0x123
+ 1037 04f8 7F010000 		.4byte	0x17f
+ 1038 04fc 05       		.uleb128 0x5
+ 1039 04fd 03       		.byte	0x3
+ 1040 04fe 00000000 		.4byte	isInTempFault
+ 1041 0502 22       		.uleb128 0x22
+ 1042 0503 10020000 		.4byte	.LASF65
+ 1043 0507 06       		.byte	0x6
+ 1044 0508 2401     		.2byte	0x124
+ 1045 050a 7F010000 		.4byte	0x17f
+ 1046 050e 05       		.uleb128 0x5
+ 1047 050f 03       		.byte	0x3
+ 1048 0510 00000000 		.4byte	IsSlave
+ 1049 0514 23       		.uleb128 0x23
+ 1050 0515 88040000 		.4byte	.LASF66
+ 1051 0519 07       		.byte	0x7
+ 1052 051a 1E       		.byte	0x1e
+ 1053 051b BA000000 		.4byte	0xba
+ 1054 051f 05       		.uleb128 0x5
+ 1055 0520 03       		.byte	0x3
+ 1056 0521 00000000 		.4byte	DMX_UART_TXSTATUS
+ 1057 0525 23       		.uleb128 0x23
+ 1058 0526 63020000 		.4byte	.LASF67
+ 1059 052a 07       		.byte	0x7
+ 1060 052b 1F       		.byte	0x1f
+ 1061 052c BA000000 		.4byte	0xba
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 23
+
+
+ 1062 0530 05       		.uleb128 0x5
+ 1063 0531 03       		.byte	0x3
+ 1064 0532 00000000 		.4byte	DMX_UART_TX_STS_COMPLETE
+ 1065 0536 23       		.uleb128 0x23
+ 1066 0537 27010000 		.4byte	.LASF68
+ 1067 053b 07       		.byte	0x7
+ 1068 053c 20       		.byte	0x20
+ 1069 053d BA000000 		.4byte	0xba
+ 1070 0541 05       		.uleb128 0x5
+ 1071 0542 03       		.byte	0x3
+ 1072 0543 00000000 		.4byte	DMX_UART_RXSTATUS
+ 1073 0547 23       		.uleb128 0x23
+ 1074 0548 5F040000 		.4byte	.LASF69
+ 1075 054c 07       		.byte	0x7
+ 1076 054d 21       		.byte	0x21
+ 1077 054e BA000000 		.4byte	0xba
+ 1078 0552 05       		.uleb128 0x5
+ 1079 0553 03       		.byte	0x3
+ 1080 0554 00000000 		.4byte	DMX_UART_RX_STS_STOP_ERROR
+ 1081 0558 23       		.uleb128 0x23
+ 1082 0559 D7020000 		.4byte	.LASF70
+ 1083 055d 07       		.byte	0x7
+ 1084 055e 22       		.byte	0x22
+ 1085 055f BA000000 		.4byte	0xba
+ 1086 0563 05       		.uleb128 0x5
+ 1087 0564 03       		.byte	0x3
+ 1088 0565 00000000 		.4byte	DMX_UART_RX_STS_FIFO_NOTEMPTY
+ 1089 0569 23       		.uleb128 0x23
+ 1090 056a A0040000 		.4byte	.LASF71
+ 1091 056e 07       		.byte	0x7
+ 1092 056f 23       		.byte	0x23
+ 1093 0570 BA000000 		.4byte	0xba
+ 1094 0574 05       		.uleb128 0x5
+ 1095 0575 03       		.byte	0x3
+ 1096 0576 00000000 		.4byte	DMX_UART_RXDATA
+ 1097 057a 24       		.uleb128 0x24
+ 1098 057b CE030000 		.4byte	.LASF72
+ 1099 057f 01       		.byte	0x1
+ 1100 0580 0F       		.byte	0xf
+ 1101 0581 8D000000 		.4byte	0x8d
+ 1102 0585 24       		.uleb128 0x24
+ 1103 0586 43010000 		.4byte	.LASF73
+ 1104 058a 01       		.byte	0x1
+ 1105 058b 14       		.byte	0x14
+ 1106 058c 54020000 		.4byte	0x254
+ 1107 0590 25       		.uleb128 0x25
+ 1108 0591 52444D00 		.ascii	"RDM\000"
+ 1109 0595 01       		.byte	0x1
+ 1110 0596 16       		.byte	0x16
+ 1111 0597 5F010000 		.4byte	0x15f
+ 1112 059b 24       		.uleb128 0x24
+ 1113 059c 1E030000 		.4byte	.LASF74
+ 1114 05a0 01       		.byte	0x1
+ 1115 05a1 18       		.byte	0x18
+ 1116 05a2 C6000000 		.4byte	0xc6
+ 1117 05a6 07       		.uleb128 0x7
+ 1118 05a7 C6000000 		.4byte	0xc6
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 24
+
+
+ 1119 05ab B1050000 		.4byte	0x5b1
+ 1120 05af 26       		.uleb128 0x26
+ 1121 05b0 00       		.byte	0
+ 1122 05b1 24       		.uleb128 0x24
+ 1123 05b2 1B000000 		.4byte	.LASF75
+ 1124 05b6 01       		.byte	0x1
+ 1125 05b7 19       		.byte	0x19
+ 1126 05b8 BC050000 		.4byte	0x5bc
+ 1127 05bc 06       		.uleb128 0x6
+ 1128 05bd A6050000 		.4byte	0x5a6
+ 1129 05c1 07       		.uleb128 0x7
+ 1130 05c2 E2050000 		.4byte	0x5e2
+ 1131 05c6 D1050000 		.4byte	0x5d1
+ 1132 05ca 08       		.uleb128 0x8
+ 1133 05cb DB000000 		.4byte	0xdb
+ 1134 05cf 05       		.byte	0x5
+ 1135 05d0 00       		.byte	0
+ 1136 05d1 13       		.uleb128 0x13
+ 1137 05d2 04       		.byte	0x4
+ 1138 05d3 D7050000 		.4byte	0x5d7
+ 1139 05d7 27       		.uleb128 0x27
+ 1140 05d8 E2050000 		.4byte	0x5e2
+ 1141 05dc 1E       		.uleb128 0x1e
+ 1142 05dd 76000000 		.4byte	0x76
+ 1143 05e1 00       		.byte	0
+ 1144 05e2 0B       		.uleb128 0xb
+ 1145 05e3 D1050000 		.4byte	0x5d1
+ 1146 05e7 23       		.uleb128 0x23
+ 1147 05e8 69000000 		.4byte	.LASF76
+ 1148 05ec 01       		.byte	0x1
+ 1149 05ed 3B       		.byte	0x3b
+ 1150 05ee F8050000 		.4byte	0x5f8
+ 1151 05f2 05       		.uleb128 0x5
+ 1152 05f3 03       		.byte	0x3
+ 1153 05f4 00000000 		.4byte	PWM_ADIM_WriteCompare
+ 1154 05f8 0B       		.uleb128 0xb
+ 1155 05f9 C1050000 		.4byte	0x5c1
+ 1156 05fd 28       		.uleb128 0x28
+ 1157 05fe DB040000 		.4byte	.LASF77
+ 1158 0602 DB040000 		.4byte	.LASF77
+ 1159 0606 07       		.byte	0x7
+ 1160 0607 1C       		.byte	0x1c
+ 1161 0608 28       		.uleb128 0x28
+ 1162 0609 DD030000 		.4byte	.LASF78
+ 1163 060d DD030000 		.4byte	.LASF78
+ 1164 0611 07       		.byte	0x7
+ 1165 0612 1A       		.byte	0x1a
+ 1166 0613 28       		.uleb128 0x28
+ 1167 0614 41030000 		.4byte	.LASF79
+ 1168 0618 41030000 		.4byte	.LASF79
+ 1169 061c 07       		.byte	0x7
+ 1170 061d 1B       		.byte	0x1b
+ 1171 061e 28       		.uleb128 0x28
+ 1172 061f F1040000 		.4byte	.LASF80
+ 1173 0623 F1040000 		.4byte	.LASF80
+ 1174 0627 05       		.byte	0x5
+ 1175 0628 73       		.byte	0x73
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 25
+
+
+ 1176 0629 28       		.uleb128 0x28
+ 1177 062a B5020000 		.4byte	.LASF81
+ 1178 062e B5020000 		.4byte	.LASF81
+ 1179 0632 07       		.byte	0x7
+ 1180 0633 2C       		.byte	0x2c
+ 1181 0634 28       		.uleb128 0x28
+ 1182 0635 94030000 		.4byte	.LASF82
+ 1183 0639 94030000 		.4byte	.LASF82
+ 1184 063d 05       		.byte	0x5
+ 1185 063e 72       		.byte	0x72
+ 1186 063f 00       		.byte	0
+ 1187              		.section	.debug_abbrev,"",%progbits
+ 1188              	.Ldebug_abbrev0:
+ 1189 0000 01       		.uleb128 0x1
+ 1190 0001 11       		.uleb128 0x11
+ 1191 0002 01       		.byte	0x1
+ 1192 0003 25       		.uleb128 0x25
+ 1193 0004 0E       		.uleb128 0xe
+ 1194 0005 13       		.uleb128 0x13
+ 1195 0006 0B       		.uleb128 0xb
+ 1196 0007 03       		.uleb128 0x3
+ 1197 0008 0E       		.uleb128 0xe
+ 1198 0009 1B       		.uleb128 0x1b
+ 1199 000a 0E       		.uleb128 0xe
+ 1200 000b 55       		.uleb128 0x55
+ 1201 000c 17       		.uleb128 0x17
+ 1202 000d 11       		.uleb128 0x11
+ 1203 000e 01       		.uleb128 0x1
+ 1204 000f 10       		.uleb128 0x10
+ 1205 0010 17       		.uleb128 0x17
+ 1206 0011 00       		.byte	0
+ 1207 0012 00       		.byte	0
+ 1208 0013 02       		.uleb128 0x2
+ 1209 0014 24       		.uleb128 0x24
+ 1210 0015 00       		.byte	0
+ 1211 0016 0B       		.uleb128 0xb
+ 1212 0017 0B       		.uleb128 0xb
+ 1213 0018 3E       		.uleb128 0x3e
+ 1214 0019 0B       		.uleb128 0xb
+ 1215 001a 03       		.uleb128 0x3
+ 1216 001b 0E       		.uleb128 0xe
+ 1217 001c 00       		.byte	0
+ 1218 001d 00       		.byte	0
+ 1219 001e 03       		.uleb128 0x3
+ 1220 001f 16       		.uleb128 0x16
+ 1221 0020 00       		.byte	0
+ 1222 0021 03       		.uleb128 0x3
+ 1223 0022 0E       		.uleb128 0xe
+ 1224 0023 3A       		.uleb128 0x3a
+ 1225 0024 0B       		.uleb128 0xb
+ 1226 0025 3B       		.uleb128 0x3b
+ 1227 0026 0B       		.uleb128 0xb
+ 1228 0027 49       		.uleb128 0x49
+ 1229 0028 13       		.uleb128 0x13
+ 1230 0029 00       		.byte	0
+ 1231 002a 00       		.byte	0
+ 1232 002b 04       		.uleb128 0x4
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 26
+
+
+ 1233 002c 24       		.uleb128 0x24
+ 1234 002d 00       		.byte	0
+ 1235 002e 0B       		.uleb128 0xb
+ 1236 002f 0B       		.uleb128 0xb
+ 1237 0030 3E       		.uleb128 0x3e
+ 1238 0031 0B       		.uleb128 0xb
+ 1239 0032 03       		.uleb128 0x3
+ 1240 0033 08       		.uleb128 0x8
+ 1241 0034 00       		.byte	0
+ 1242 0035 00       		.byte	0
+ 1243 0036 05       		.uleb128 0x5
+ 1244 0037 16       		.uleb128 0x16
+ 1245 0038 00       		.byte	0
+ 1246 0039 03       		.uleb128 0x3
+ 1247 003a 0E       		.uleb128 0xe
+ 1248 003b 3A       		.uleb128 0x3a
+ 1249 003c 0B       		.uleb128 0xb
+ 1250 003d 3B       		.uleb128 0x3b
+ 1251 003e 05       		.uleb128 0x5
+ 1252 003f 49       		.uleb128 0x49
+ 1253 0040 13       		.uleb128 0x13
+ 1254 0041 00       		.byte	0
+ 1255 0042 00       		.byte	0
+ 1256 0043 06       		.uleb128 0x6
+ 1257 0044 35       		.uleb128 0x35
+ 1258 0045 00       		.byte	0
+ 1259 0046 49       		.uleb128 0x49
+ 1260 0047 13       		.uleb128 0x13
+ 1261 0048 00       		.byte	0
+ 1262 0049 00       		.byte	0
+ 1263 004a 07       		.uleb128 0x7
+ 1264 004b 01       		.uleb128 0x1
+ 1265 004c 01       		.byte	0x1
+ 1266 004d 49       		.uleb128 0x49
+ 1267 004e 13       		.uleb128 0x13
+ 1268 004f 01       		.uleb128 0x1
+ 1269 0050 13       		.uleb128 0x13
+ 1270 0051 00       		.byte	0
+ 1271 0052 00       		.byte	0
+ 1272 0053 08       		.uleb128 0x8
+ 1273 0054 21       		.uleb128 0x21
+ 1274 0055 00       		.byte	0
+ 1275 0056 49       		.uleb128 0x49
+ 1276 0057 13       		.uleb128 0x13
+ 1277 0058 2F       		.uleb128 0x2f
+ 1278 0059 0B       		.uleb128 0xb
+ 1279 005a 00       		.byte	0
+ 1280 005b 00       		.byte	0
+ 1281 005c 09       		.uleb128 0x9
+ 1282 005d 13       		.uleb128 0x13
+ 1283 005e 01       		.byte	0x1
+ 1284 005f 0B       		.uleb128 0xb
+ 1285 0060 0B       		.uleb128 0xb
+ 1286 0061 3A       		.uleb128 0x3a
+ 1287 0062 0B       		.uleb128 0xb
+ 1288 0063 3B       		.uleb128 0x3b
+ 1289 0064 0B       		.uleb128 0xb
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 27
+
+
+ 1290 0065 01       		.uleb128 0x1
+ 1291 0066 13       		.uleb128 0x13
+ 1292 0067 00       		.byte	0
+ 1293 0068 00       		.byte	0
+ 1294 0069 0A       		.uleb128 0xa
+ 1295 006a 0D       		.uleb128 0xd
+ 1296 006b 00       		.byte	0
+ 1297 006c 03       		.uleb128 0x3
+ 1298 006d 0E       		.uleb128 0xe
+ 1299 006e 3A       		.uleb128 0x3a
+ 1300 006f 0B       		.uleb128 0xb
+ 1301 0070 3B       		.uleb128 0x3b
+ 1302 0071 0B       		.uleb128 0xb
+ 1303 0072 49       		.uleb128 0x49
+ 1304 0073 13       		.uleb128 0x13
+ 1305 0074 38       		.uleb128 0x38
+ 1306 0075 0B       		.uleb128 0xb
+ 1307 0076 00       		.byte	0
+ 1308 0077 00       		.byte	0
+ 1309 0078 0B       		.uleb128 0xb
+ 1310 0079 26       		.uleb128 0x26
+ 1311 007a 00       		.byte	0
+ 1312 007b 49       		.uleb128 0x49
+ 1313 007c 13       		.uleb128 0x13
+ 1314 007d 00       		.byte	0
+ 1315 007e 00       		.byte	0
+ 1316 007f 0C       		.uleb128 0xc
+ 1317 0080 0D       		.uleb128 0xd
+ 1318 0081 00       		.byte	0
+ 1319 0082 03       		.uleb128 0x3
+ 1320 0083 0E       		.uleb128 0xe
+ 1321 0084 3A       		.uleb128 0x3a
+ 1322 0085 0B       		.uleb128 0xb
+ 1323 0086 3B       		.uleb128 0x3b
+ 1324 0087 05       		.uleb128 0x5
+ 1325 0088 49       		.uleb128 0x49
+ 1326 0089 13       		.uleb128 0x13
+ 1327 008a 38       		.uleb128 0x38
+ 1328 008b 0B       		.uleb128 0xb
+ 1329 008c 00       		.byte	0
+ 1330 008d 00       		.byte	0
+ 1331 008e 0D       		.uleb128 0xd
+ 1332 008f 13       		.uleb128 0x13
+ 1333 0090 01       		.byte	0x1
+ 1334 0091 0B       		.uleb128 0xb
+ 1335 0092 0B       		.uleb128 0xb
+ 1336 0093 3A       		.uleb128 0x3a
+ 1337 0094 0B       		.uleb128 0xb
+ 1338 0095 3B       		.uleb128 0x3b
+ 1339 0096 05       		.uleb128 0x5
+ 1340 0097 01       		.uleb128 0x1
+ 1341 0098 13       		.uleb128 0x13
+ 1342 0099 00       		.byte	0
+ 1343 009a 00       		.byte	0
+ 1344 009b 0E       		.uleb128 0xe
+ 1345 009c 2E       		.uleb128 0x2e
+ 1346 009d 01       		.byte	0x1
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 28
+
+
+ 1347 009e 3F       		.uleb128 0x3f
+ 1348 009f 19       		.uleb128 0x19
+ 1349 00a0 03       		.uleb128 0x3
+ 1350 00a1 0E       		.uleb128 0xe
+ 1351 00a2 3A       		.uleb128 0x3a
+ 1352 00a3 0B       		.uleb128 0xb
+ 1353 00a4 3B       		.uleb128 0x3b
+ 1354 00a5 0B       		.uleb128 0xb
+ 1355 00a6 27       		.uleb128 0x27
+ 1356 00a7 19       		.uleb128 0x19
+ 1357 00a8 11       		.uleb128 0x11
+ 1358 00a9 01       		.uleb128 0x1
+ 1359 00aa 12       		.uleb128 0x12
+ 1360 00ab 06       		.uleb128 0x6
+ 1361 00ac 40       		.uleb128 0x40
+ 1362 00ad 18       		.uleb128 0x18
+ 1363 00ae 9742     		.uleb128 0x2117
+ 1364 00b0 19       		.uleb128 0x19
+ 1365 00b1 01       		.uleb128 0x1
+ 1366 00b2 13       		.uleb128 0x13
+ 1367 00b3 00       		.byte	0
+ 1368 00b4 00       		.byte	0
+ 1369 00b5 0F       		.uleb128 0xf
+ 1370 00b6 05       		.uleb128 0x5
+ 1371 00b7 00       		.byte	0
+ 1372 00b8 03       		.uleb128 0x3
+ 1373 00b9 0E       		.uleb128 0xe
+ 1374 00ba 3A       		.uleb128 0x3a
+ 1375 00bb 0B       		.uleb128 0xb
+ 1376 00bc 3B       		.uleb128 0x3b
+ 1377 00bd 0B       		.uleb128 0xb
+ 1378 00be 49       		.uleb128 0x49
+ 1379 00bf 13       		.uleb128 0x13
+ 1380 00c0 02       		.uleb128 0x2
+ 1381 00c1 17       		.uleb128 0x17
+ 1382 00c2 00       		.byte	0
+ 1383 00c3 00       		.byte	0
+ 1384 00c4 10       		.uleb128 0x10
+ 1385 00c5 898201   		.uleb128 0x4109
+ 1386 00c8 01       		.byte	0x1
+ 1387 00c9 11       		.uleb128 0x11
+ 1388 00ca 01       		.uleb128 0x1
+ 1389 00cb 31       		.uleb128 0x31
+ 1390 00cc 13       		.uleb128 0x13
+ 1391 00cd 01       		.uleb128 0x1
+ 1392 00ce 13       		.uleb128 0x13
+ 1393 00cf 00       		.byte	0
+ 1394 00d0 00       		.byte	0
+ 1395 00d1 11       		.uleb128 0x11
+ 1396 00d2 8A8201   		.uleb128 0x410a
+ 1397 00d5 00       		.byte	0
+ 1398 00d6 02       		.uleb128 0x2
+ 1399 00d7 18       		.uleb128 0x18
+ 1400 00d8 9142     		.uleb128 0x2111
+ 1401 00da 18       		.uleb128 0x18
+ 1402 00db 00       		.byte	0
+ 1403 00dc 00       		.byte	0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 29
+
+
+ 1404 00dd 12       		.uleb128 0x12
+ 1405 00de 898201   		.uleb128 0x4109
+ 1406 00e1 01       		.byte	0x1
+ 1407 00e2 11       		.uleb128 0x11
+ 1408 00e3 01       		.uleb128 0x1
+ 1409 00e4 9542     		.uleb128 0x2115
+ 1410 00e6 19       		.uleb128 0x19
+ 1411 00e7 31       		.uleb128 0x31
+ 1412 00e8 13       		.uleb128 0x13
+ 1413 00e9 00       		.byte	0
+ 1414 00ea 00       		.byte	0
+ 1415 00eb 13       		.uleb128 0x13
+ 1416 00ec 0F       		.uleb128 0xf
+ 1417 00ed 00       		.byte	0
+ 1418 00ee 0B       		.uleb128 0xb
+ 1419 00ef 0B       		.uleb128 0xb
+ 1420 00f0 49       		.uleb128 0x49
+ 1421 00f1 13       		.uleb128 0x13
+ 1422 00f2 00       		.byte	0
+ 1423 00f3 00       		.byte	0
+ 1424 00f4 14       		.uleb128 0x14
+ 1425 00f5 34       		.uleb128 0x34
+ 1426 00f6 00       		.byte	0
+ 1427 00f7 03       		.uleb128 0x3
+ 1428 00f8 0E       		.uleb128 0xe
+ 1429 00f9 3A       		.uleb128 0x3a
+ 1430 00fa 0B       		.uleb128 0xb
+ 1431 00fb 3B       		.uleb128 0x3b
+ 1432 00fc 0B       		.uleb128 0xb
+ 1433 00fd 49       		.uleb128 0x49
+ 1434 00fe 13       		.uleb128 0x13
+ 1435 00ff 02       		.uleb128 0x2
+ 1436 0100 18       		.uleb128 0x18
+ 1437 0101 00       		.byte	0
+ 1438 0102 00       		.byte	0
+ 1439 0103 15       		.uleb128 0x15
+ 1440 0104 04       		.uleb128 0x4
+ 1441 0105 01       		.byte	0x1
+ 1442 0106 0B       		.uleb128 0xb
+ 1443 0107 0B       		.uleb128 0xb
+ 1444 0108 49       		.uleb128 0x49
+ 1445 0109 13       		.uleb128 0x13
+ 1446 010a 3A       		.uleb128 0x3a
+ 1447 010b 0B       		.uleb128 0xb
+ 1448 010c 3B       		.uleb128 0x3b
+ 1449 010d 0B       		.uleb128 0xb
+ 1450 010e 01       		.uleb128 0x1
+ 1451 010f 13       		.uleb128 0x13
+ 1452 0110 00       		.byte	0
+ 1453 0111 00       		.byte	0
+ 1454 0112 16       		.uleb128 0x16
+ 1455 0113 28       		.uleb128 0x28
+ 1456 0114 00       		.byte	0
+ 1457 0115 03       		.uleb128 0x3
+ 1458 0116 0E       		.uleb128 0xe
+ 1459 0117 1C       		.uleb128 0x1c
+ 1460 0118 0B       		.uleb128 0xb
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 30
+
+
+ 1461 0119 00       		.byte	0
+ 1462 011a 00       		.byte	0
+ 1463 011b 17       		.uleb128 0x17
+ 1464 011c 0B       		.uleb128 0xb
+ 1465 011d 01       		.byte	0x1
+ 1466 011e 55       		.uleb128 0x55
+ 1467 011f 17       		.uleb128 0x17
+ 1468 0120 01       		.uleb128 0x1
+ 1469 0121 13       		.uleb128 0x13
+ 1470 0122 00       		.byte	0
+ 1471 0123 00       		.byte	0
+ 1472 0124 18       		.uleb128 0x18
+ 1473 0125 34       		.uleb128 0x34
+ 1474 0126 00       		.byte	0
+ 1475 0127 03       		.uleb128 0x3
+ 1476 0128 0E       		.uleb128 0xe
+ 1477 0129 3A       		.uleb128 0x3a
+ 1478 012a 0B       		.uleb128 0xb
+ 1479 012b 3B       		.uleb128 0x3b
+ 1480 012c 0B       		.uleb128 0xb
+ 1481 012d 49       		.uleb128 0x49
+ 1482 012e 13       		.uleb128 0x13
+ 1483 012f 02       		.uleb128 0x2
+ 1484 0130 17       		.uleb128 0x17
+ 1485 0131 00       		.byte	0
+ 1486 0132 00       		.byte	0
+ 1487 0133 19       		.uleb128 0x19
+ 1488 0134 0B       		.uleb128 0xb
+ 1489 0135 01       		.byte	0x1
+ 1490 0136 11       		.uleb128 0x11
+ 1491 0137 01       		.uleb128 0x1
+ 1492 0138 12       		.uleb128 0x12
+ 1493 0139 06       		.uleb128 0x6
+ 1494 013a 01       		.uleb128 0x1
+ 1495 013b 13       		.uleb128 0x13
+ 1496 013c 00       		.byte	0
+ 1497 013d 00       		.byte	0
+ 1498 013e 1A       		.uleb128 0x1a
+ 1499 013f 34       		.uleb128 0x34
+ 1500 0140 00       		.byte	0
+ 1501 0141 03       		.uleb128 0x3
+ 1502 0142 08       		.uleb128 0x8
+ 1503 0143 3A       		.uleb128 0x3a
+ 1504 0144 0B       		.uleb128 0xb
+ 1505 0145 3B       		.uleb128 0x3b
+ 1506 0146 0B       		.uleb128 0xb
+ 1507 0147 49       		.uleb128 0x49
+ 1508 0148 13       		.uleb128 0x13
+ 1509 0149 02       		.uleb128 0x2
+ 1510 014a 17       		.uleb128 0x17
+ 1511 014b 00       		.byte	0
+ 1512 014c 00       		.byte	0
+ 1513 014d 1B       		.uleb128 0x1b
+ 1514 014e 898201   		.uleb128 0x4109
+ 1515 0151 00       		.byte	0
+ 1516 0152 11       		.uleb128 0x11
+ 1517 0153 01       		.uleb128 0x1
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 31
+
+
+ 1518 0154 31       		.uleb128 0x31
+ 1519 0155 13       		.uleb128 0x13
+ 1520 0156 00       		.byte	0
+ 1521 0157 00       		.byte	0
+ 1522 0158 1C       		.uleb128 0x1c
+ 1523 0159 0B       		.uleb128 0xb
+ 1524 015a 01       		.byte	0x1
+ 1525 015b 55       		.uleb128 0x55
+ 1526 015c 17       		.uleb128 0x17
+ 1527 015d 00       		.byte	0
+ 1528 015e 00       		.byte	0
+ 1529 015f 1D       		.uleb128 0x1d
+ 1530 0160 2E       		.uleb128 0x2e
+ 1531 0161 01       		.byte	0x1
+ 1532 0162 3F       		.uleb128 0x3f
+ 1533 0163 19       		.uleb128 0x19
+ 1534 0164 03       		.uleb128 0x3
+ 1535 0165 0E       		.uleb128 0xe
+ 1536 0166 3A       		.uleb128 0x3a
+ 1537 0167 0B       		.uleb128 0xb
+ 1538 0168 3B       		.uleb128 0x3b
+ 1539 0169 0B       		.uleb128 0xb
+ 1540 016a 27       		.uleb128 0x27
+ 1541 016b 19       		.uleb128 0x19
+ 1542 016c 49       		.uleb128 0x49
+ 1543 016d 13       		.uleb128 0x13
+ 1544 016e 3C       		.uleb128 0x3c
+ 1545 016f 19       		.uleb128 0x19
+ 1546 0170 00       		.byte	0
+ 1547 0171 00       		.byte	0
+ 1548 0172 1E       		.uleb128 0x1e
+ 1549 0173 05       		.uleb128 0x5
+ 1550 0174 00       		.byte	0
+ 1551 0175 49       		.uleb128 0x49
+ 1552 0176 13       		.uleb128 0x13
+ 1553 0177 00       		.byte	0
+ 1554 0178 00       		.byte	0
+ 1555 0179 1F       		.uleb128 0x1f
+ 1556 017a 898201   		.uleb128 0x4109
+ 1557 017d 00       		.byte	0
+ 1558 017e 11       		.uleb128 0x11
+ 1559 017f 01       		.uleb128 0x1
+ 1560 0180 9542     		.uleb128 0x2115
+ 1561 0182 19       		.uleb128 0x19
+ 1562 0183 31       		.uleb128 0x31
+ 1563 0184 13       		.uleb128 0x13
+ 1564 0185 00       		.byte	0
+ 1565 0186 00       		.byte	0
+ 1566 0187 20       		.uleb128 0x20
+ 1567 0188 0F       		.uleb128 0xf
+ 1568 0189 00       		.byte	0
+ 1569 018a 0B       		.uleb128 0xb
+ 1570 018b 0B       		.uleb128 0xb
+ 1571 018c 00       		.byte	0
+ 1572 018d 00       		.byte	0
+ 1573 018e 21       		.uleb128 0x21
+ 1574 018f 26       		.uleb128 0x26
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 32
+
+
+ 1575 0190 00       		.byte	0
+ 1576 0191 00       		.byte	0
+ 1577 0192 00       		.byte	0
+ 1578 0193 22       		.uleb128 0x22
+ 1579 0194 34       		.uleb128 0x34
+ 1580 0195 00       		.byte	0
+ 1581 0196 03       		.uleb128 0x3
+ 1582 0197 0E       		.uleb128 0xe
+ 1583 0198 3A       		.uleb128 0x3a
+ 1584 0199 0B       		.uleb128 0xb
+ 1585 019a 3B       		.uleb128 0x3b
+ 1586 019b 05       		.uleb128 0x5
+ 1587 019c 49       		.uleb128 0x49
+ 1588 019d 13       		.uleb128 0x13
+ 1589 019e 3F       		.uleb128 0x3f
+ 1590 019f 19       		.uleb128 0x19
+ 1591 01a0 02       		.uleb128 0x2
+ 1592 01a1 18       		.uleb128 0x18
+ 1593 01a2 00       		.byte	0
+ 1594 01a3 00       		.byte	0
+ 1595 01a4 23       		.uleb128 0x23
+ 1596 01a5 34       		.uleb128 0x34
+ 1597 01a6 00       		.byte	0
+ 1598 01a7 03       		.uleb128 0x3
+ 1599 01a8 0E       		.uleb128 0xe
+ 1600 01a9 3A       		.uleb128 0x3a
+ 1601 01aa 0B       		.uleb128 0xb
+ 1602 01ab 3B       		.uleb128 0x3b
+ 1603 01ac 0B       		.uleb128 0xb
+ 1604 01ad 49       		.uleb128 0x49
+ 1605 01ae 13       		.uleb128 0x13
+ 1606 01af 3F       		.uleb128 0x3f
+ 1607 01b0 19       		.uleb128 0x19
+ 1608 01b1 02       		.uleb128 0x2
+ 1609 01b2 18       		.uleb128 0x18
+ 1610 01b3 00       		.byte	0
+ 1611 01b4 00       		.byte	0
+ 1612 01b5 24       		.uleb128 0x24
+ 1613 01b6 34       		.uleb128 0x34
+ 1614 01b7 00       		.byte	0
+ 1615 01b8 03       		.uleb128 0x3
+ 1616 01b9 0E       		.uleb128 0xe
+ 1617 01ba 3A       		.uleb128 0x3a
+ 1618 01bb 0B       		.uleb128 0xb
+ 1619 01bc 3B       		.uleb128 0x3b
+ 1620 01bd 0B       		.uleb128 0xb
+ 1621 01be 49       		.uleb128 0x49
+ 1622 01bf 13       		.uleb128 0x13
+ 1623 01c0 3F       		.uleb128 0x3f
+ 1624 01c1 19       		.uleb128 0x19
+ 1625 01c2 3C       		.uleb128 0x3c
+ 1626 01c3 19       		.uleb128 0x19
+ 1627 01c4 00       		.byte	0
+ 1628 01c5 00       		.byte	0
+ 1629 01c6 25       		.uleb128 0x25
+ 1630 01c7 34       		.uleb128 0x34
+ 1631 01c8 00       		.byte	0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 33
+
+
+ 1632 01c9 03       		.uleb128 0x3
+ 1633 01ca 08       		.uleb128 0x8
+ 1634 01cb 3A       		.uleb128 0x3a
+ 1635 01cc 0B       		.uleb128 0xb
+ 1636 01cd 3B       		.uleb128 0x3b
+ 1637 01ce 0B       		.uleb128 0xb
+ 1638 01cf 49       		.uleb128 0x49
+ 1639 01d0 13       		.uleb128 0x13
+ 1640 01d1 3F       		.uleb128 0x3f
+ 1641 01d2 19       		.uleb128 0x19
+ 1642 01d3 3C       		.uleb128 0x3c
+ 1643 01d4 19       		.uleb128 0x19
+ 1644 01d5 00       		.byte	0
+ 1645 01d6 00       		.byte	0
+ 1646 01d7 26       		.uleb128 0x26
+ 1647 01d8 21       		.uleb128 0x21
+ 1648 01d9 00       		.byte	0
+ 1649 01da 00       		.byte	0
+ 1650 01db 00       		.byte	0
+ 1651 01dc 27       		.uleb128 0x27
+ 1652 01dd 15       		.uleb128 0x15
+ 1653 01de 01       		.byte	0x1
+ 1654 01df 27       		.uleb128 0x27
+ 1655 01e0 19       		.uleb128 0x19
+ 1656 01e1 01       		.uleb128 0x1
+ 1657 01e2 13       		.uleb128 0x13
+ 1658 01e3 00       		.byte	0
+ 1659 01e4 00       		.byte	0
+ 1660 01e5 28       		.uleb128 0x28
+ 1661 01e6 2E       		.uleb128 0x2e
+ 1662 01e7 00       		.byte	0
+ 1663 01e8 3F       		.uleb128 0x3f
+ 1664 01e9 19       		.uleb128 0x19
+ 1665 01ea 3C       		.uleb128 0x3c
+ 1666 01eb 19       		.uleb128 0x19
+ 1667 01ec 6E       		.uleb128 0x6e
+ 1668 01ed 0E       		.uleb128 0xe
+ 1669 01ee 03       		.uleb128 0x3
+ 1670 01ef 0E       		.uleb128 0xe
+ 1671 01f0 3A       		.uleb128 0x3a
+ 1672 01f1 0B       		.uleb128 0xb
+ 1673 01f2 3B       		.uleb128 0x3b
+ 1674 01f3 0B       		.uleb128 0xb
+ 1675 01f4 00       		.byte	0
+ 1676 01f5 00       		.byte	0
+ 1677 01f6 00       		.byte	0
+ 1678              		.section	.debug_loc,"",%progbits
+ 1679              	.Ldebug_loc0:
+ 1680              	.LLST0:
+ 1681 0000 00000000 		.4byte	.LVL0
+ 1682 0004 08000000 		.4byte	.LVL1
+ 1683 0008 0100     		.2byte	0x1
+ 1684 000a 50       		.byte	0x50
+ 1685 000b 08000000 		.4byte	.LVL1
+ 1686 000f 46000000 		.4byte	.LVL9
+ 1687 0013 0100     		.2byte	0x1
+ 1688 0015 54       		.byte	0x54
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 34
+
+
+ 1689 0016 46000000 		.4byte	.LVL9
+ 1690 001a 54000000 		.4byte	.LFE0
+ 1691 001e 0400     		.2byte	0x4
+ 1692 0020 F3       		.byte	0xf3
+ 1693 0021 01       		.uleb128 0x1
+ 1694 0022 50       		.byte	0x50
+ 1695 0023 9F       		.byte	0x9f
+ 1696 0024 00000000 		.4byte	0
+ 1697 0028 00000000 		.4byte	0
+ 1698              	.LLST1:
+ 1699 002c 00000000 		.4byte	.LVL0
+ 1700 0030 0D000000 		.4byte	.LVL2-1
+ 1701 0034 0100     		.2byte	0x1
+ 1702 0036 51       		.byte	0x51
+ 1703 0037 0D000000 		.4byte	.LVL2-1
+ 1704 003b 54000000 		.4byte	.LFE0
+ 1705 003f 0400     		.2byte	0x4
+ 1706 0041 F3       		.byte	0xf3
+ 1707 0042 01       		.uleb128 0x1
+ 1708 0043 51       		.byte	0x51
+ 1709 0044 9F       		.byte	0x9f
+ 1710 0045 00000000 		.4byte	0
+ 1711 0049 00000000 		.4byte	0
+ 1712              	.LLST2:
+ 1713 004d 00000000 		.4byte	.LVL0
+ 1714 0051 0D000000 		.4byte	.LVL2-1
+ 1715 0055 0100     		.2byte	0x1
+ 1716 0057 52       		.byte	0x52
+ 1717 0058 0D000000 		.4byte	.LVL2-1
+ 1718 005c 54000000 		.4byte	.LFE0
+ 1719 0060 0400     		.2byte	0x4
+ 1720 0062 F3       		.byte	0xf3
+ 1721 0063 01       		.uleb128 0x1
+ 1722 0064 52       		.byte	0x52
+ 1723 0065 9F       		.byte	0x9f
+ 1724 0066 00000000 		.4byte	0
+ 1725 006a 00000000 		.4byte	0
+ 1726              	.LLST3:
+ 1727 006e 80000000 		.4byte	.LVL20
+ 1728 0072 8C000000 		.4byte	.LVL21
+ 1729 0076 0100     		.2byte	0x1
+ 1730 0078 50       		.byte	0x50
+ 1731 0079 9C000000 		.4byte	.LVL22
+ 1732 007d 01010000 		.4byte	.LVL26-1
+ 1733 0081 0100     		.2byte	0x1
+ 1734 0083 50       		.byte	0x50
+ 1735 0084 00000000 		.4byte	0
+ 1736 0088 00000000 		.4byte	0
+ 1737              	.LLST4:
+ 1738 008c C6000000 		.4byte	.LVL23
+ 1739 0090 F0000000 		.4byte	.LVL24
+ 1740 0094 0100     		.2byte	0x1
+ 1741 0096 53       		.byte	0x53
+ 1742 0097 F0000000 		.4byte	.LVL24
+ 1743 009b F2000000 		.4byte	.LVL25
+ 1744 009f 0300     		.2byte	0x3
+ 1745 00a1 73       		.byte	0x73
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 35
+
+
+ 1746 00a2 01       		.sleb128 1
+ 1747 00a3 9F       		.byte	0x9f
+ 1748 00a4 00000000 		.4byte	0
+ 1749 00a8 00000000 		.4byte	0
+ 1750              	.LLST5:
+ 1751 00ac 36000000 		.4byte	.LVL11
+ 1752 00b0 3E000000 		.4byte	.LVL12
+ 1753 00b4 0200     		.2byte	0x2
+ 1754 00b6 31       		.byte	0x31
+ 1755 00b7 9F       		.byte	0x9f
+ 1756 00b8 3E000000 		.4byte	.LVL12
+ 1757 00bc 54000000 		.4byte	.LVL16
+ 1758 00c0 0100     		.2byte	0x1
+ 1759 00c2 52       		.byte	0x52
+ 1760 00c3 54000000 		.4byte	.LVL16
+ 1761 00c7 6F000000 		.4byte	.LVL18-1
+ 1762 00cb 3700     		.2byte	0x37
+ 1763 00cd 03       		.byte	0x3
+ 1764 00ce 04000000 		.4byte	check_frame.4579+2
+ 1765 00d2 94       		.byte	0x94
+ 1766 00d3 02       		.byte	0x2
+ 1767 00d4 0A       		.byte	0xa
+ 1768 00d5 FFFF     		.2byte	0xffff
+ 1769 00d7 1A       		.byte	0x1a
+ 1770 00d8 03       		.byte	0x3
+ 1771 00d9 02000000 		.4byte	check_frame.4579
+ 1772 00dd 94       		.byte	0x94
+ 1773 00de 02       		.byte	0x2
+ 1774 00df 0A       		.byte	0xa
+ 1775 00e0 FFFF     		.2byte	0xffff
+ 1776 00e2 1A       		.byte	0x1a
+ 1777 00e3 1C       		.byte	0x1c
+ 1778 00e4 30       		.byte	0x30
+ 1779 00e5 29       		.byte	0x29
+ 1780 00e6 30       		.byte	0x30
+ 1781 00e7 03       		.byte	0x3
+ 1782 00e8 06000000 		.4byte	check_frame.4579+4
+ 1783 00ec 94       		.byte	0x94
+ 1784 00ed 02       		.byte	0x2
+ 1785 00ee 0A       		.byte	0xa
+ 1786 00ef FFFF     		.2byte	0xffff
+ 1787 00f1 1A       		.byte	0x1a
+ 1788 00f2 03       		.byte	0x3
+ 1789 00f3 02000000 		.4byte	check_frame.4579
+ 1790 00f7 94       		.byte	0x94
+ 1791 00f8 02       		.byte	0x2
+ 1792 00f9 0A       		.byte	0xa
+ 1793 00fa FFFF     		.2byte	0xffff
+ 1794 00fc 1A       		.byte	0x1a
+ 1795 00fd 29       		.byte	0x29
+ 1796 00fe 28       		.byte	0x28
+ 1797 00ff 0100     		.2byte	0x1
+ 1798 0101 16       		.byte	0x16
+ 1799 0102 13       		.byte	0x13
+ 1800 0103 9F       		.byte	0x9f
+ 1801 0104 00000000 		.4byte	0
+ 1802 0108 00000000 		.4byte	0
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 36
+
+
+ 1803              	.LLST6:
+ 1804 010c 36000000 		.4byte	.LVL11
+ 1805 0110 52000000 		.4byte	.LVL15
+ 1806 0114 0100     		.2byte	0x1
+ 1807 0116 51       		.byte	0x51
+ 1808 0117 52000000 		.4byte	.LVL15
+ 1809 011b 6F000000 		.4byte	.LVL18-1
+ 1810 011f 0500     		.2byte	0x5
+ 1811 0121 03       		.byte	0x3
+ 1812 0122 02000000 		.4byte	check_frame.4579
+ 1813 0126 00000000 		.4byte	0
+ 1814 012a 00000000 		.4byte	0
+ 1815              	.LLST7:
+ 1816 012e 36000000 		.4byte	.LVL11
+ 1817 0132 3E000000 		.4byte	.LVL12
+ 1818 0136 0200     		.2byte	0x2
+ 1819 0138 31       		.byte	0x31
+ 1820 0139 9F       		.byte	0x9f
+ 1821 013a 3E000000 		.4byte	.LVL12
+ 1822 013e 46000000 		.4byte	.LVL13
+ 1823 0142 0200     		.2byte	0x2
+ 1824 0144 32       		.byte	0x32
+ 1825 0145 9F       		.byte	0x9f
+ 1826 0146 46000000 		.4byte	.LVL13
+ 1827 014a 4C000000 		.4byte	.LVL14
+ 1828 014e 0200     		.2byte	0x2
+ 1829 0150 33       		.byte	0x33
+ 1830 0151 9F       		.byte	0x9f
+ 1831 0152 4C000000 		.4byte	.LVL14
+ 1832 0156 64000000 		.4byte	.LVL17
+ 1833 015a 0200     		.2byte	0x2
+ 1834 015c 34       		.byte	0x34
+ 1835 015d 9F       		.byte	0x9f
+ 1836 015e 00000000 		.4byte	0
+ 1837 0162 00000000 		.4byte	0
+ 1838              		.section	.debug_aranges,"",%progbits
+ 1839 0000 24000000 		.4byte	0x24
+ 1840 0004 0200     		.2byte	0x2
+ 1841 0006 00000000 		.4byte	.Ldebug_info0
+ 1842 000a 04       		.byte	0x4
+ 1843 000b 00       		.byte	0
+ 1844 000c 0000     		.2byte	0
+ 1845 000e 0000     		.2byte	0
+ 1846 0010 00000000 		.4byte	.LFB0
+ 1847 0014 54000000 		.4byte	.LFE0-.LFB0
+ 1848 0018 00000000 		.4byte	.LFB1
+ 1849 001c 40010000 		.4byte	.LFE1-.LFB1
+ 1850 0020 00000000 		.4byte	0
+ 1851 0024 00000000 		.4byte	0
+ 1852              		.section	.debug_ranges,"",%progbits
+ 1853              	.Ldebug_ranges0:
+ 1854 0000 10000000 		.4byte	.LBB2
+ 1855 0004 12000000 		.4byte	.LBE2
+ 1856 0008 78000000 		.4byte	.LBB8
+ 1857 000c 92000000 		.4byte	.LBE8
+ 1858 0010 9C000000 		.4byte	.LBB9
+ 1859 0014 0C010000 		.4byte	.LBE9
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 37
+
+
+ 1860 0018 00000000 		.4byte	0
+ 1861 001c 00000000 		.4byte	0
+ 1862 0020 18000000 		.4byte	.LBB4
+ 1863 0024 70000000 		.4byte	.LBE4
+ 1864 0028 74000000 		.4byte	.LBB7
+ 1865 002c 78000000 		.4byte	.LBE7
+ 1866 0030 00000000 		.4byte	0
+ 1867 0034 00000000 		.4byte	0
+ 1868 0038 00000000 		.4byte	.LFB0
+ 1869 003c 54000000 		.4byte	.LFE0
+ 1870 0040 00000000 		.4byte	.LFB1
+ 1871 0044 40010000 		.4byte	.LFE1
+ 1872 0048 00000000 		.4byte	0
+ 1873 004c 00000000 		.4byte	0
+ 1874              		.section	.debug_line,"",%progbits
+ 1875              	.Ldebug_line0:
+ 1876 0000 E2010000 		.section	.debug_str,"MS",%progbits,1
+ 1876      02005701 
+ 1876      00000201 
+ 1876      FB0E0D00 
+ 1876      01010101 
+ 1877              	.LASF12:
+ 1878 0000 75696E74 		.ascii	"uint16\000"
+ 1878      313600
+ 1879              	.LASF45:
+ 1880 0007 73697A65 		.ascii	"size_t\000"
+ 1880      5F7400
+ 1881              	.LASF31:
+ 1882 000e 75694D61 		.ascii	"uiMaxCurrent\000"
+ 1882      78437572 
+ 1882      72656E74 
+ 1882      00
+ 1883              	.LASF75:
+ 1884 001b 6279444D 		.ascii	"byDMXData\000"
+ 1884      58446174 
+ 1884      6100
+ 1885              	.LASF7:
+ 1886 0025 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1886      206C6F6E 
+ 1886      6720756E 
+ 1886      7369676E 
+ 1886      65642069 
+ 1887              	.LASF44:
+ 1888 003c 65657072 		.ascii	"eeprom_i2c_data\000"
+ 1888      6F6D5F69 
+ 1888      32635F64 
+ 1888      61746100 
+ 1889              	.LASF51:
+ 1890 004c 64617461 		.ascii	"data_buffer\000"
+ 1890      5F627566 
+ 1890      66657200 
+ 1891              	.LASF25:
+ 1892 0058 62794C65 		.ascii	"byLevel\000"
+ 1892      76656C00 
+ 1893              	.LASF52:
+ 1894 0060 64617461 		.ascii	"data_idx\000"
+ 1894      5F696478 
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 38
+
+
+ 1894      00
+ 1895              	.LASF76:
+ 1896 0069 50574D5F 		.ascii	"PWM_ADIM_WriteCompare\000"
+ 1896      4144494D 
+ 1896      5F577269 
+ 1896      7465436F 
+ 1896      6D706172 
+ 1897              	.LASF6:
+ 1898 007f 6C6F6E67 		.ascii	"long long int\000"
+ 1898      206C6F6E 
+ 1898      6720696E 
+ 1898      7400
+ 1899              	.LASF0:
+ 1900 008d 7369676E 		.ascii	"signed char\000"
+ 1900      65642063 
+ 1900      68617200 
+ 1901              	.LASF83:
+ 1902 0099 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1902      43313120 
+ 1902      352E342E 
+ 1902      31203230 
+ 1902      31363036 
+ 1903 00cc 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1903      20726576 
+ 1903      6973696F 
+ 1903      6E203233 
+ 1903      37373135 
+ 1904 00ff 73202D66 		.ascii	"s -ffunction-sections -ffat-lto-objects\000"
+ 1904      66756E63 
+ 1904      74696F6E 
+ 1904      2D736563 
+ 1904      74696F6E 
+ 1905              	.LASF68:
+ 1906 0127 444D585F 		.ascii	"DMX_UART_RXSTATUS\000"
+ 1906      55415254 
+ 1906      5F525853 
+ 1906      54415455 
+ 1906      5300
+ 1907              	.LASF26:
+ 1908 0139 73747275 		.ascii	"structRDM\000"
+ 1908      63745244 
+ 1908      4D00
+ 1909              	.LASF73:
+ 1910 0143 496E666F 		.ascii	"Info\000"
+ 1910      00
+ 1911              	.LASF57:
+ 1912 0148 73746174 		.ascii	"state\000"
+ 1912      6500
+ 1913              	.LASF4:
+ 1914 014e 6C6F6E67 		.ascii	"long int\000"
+ 1914      20696E74 
+ 1914      00
+ 1915              	.LASF63:
+ 1916 0157 75695465 		.ascii	"uiTempFaultCount\000"
+ 1916      6D704661 
+ 1916      756C7443 
+ 1916      6F756E74 
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 39
+
+
+ 1916      00
+ 1917              	.LASF60:
+ 1918 0168 63686563 		.ascii	"check\000"
+ 1918      6B00
+ 1919              	.LASF36:
+ 1920 016e 666C5465 		.ascii	"flTempRampUp\000"
+ 1920      6D705261 
+ 1920      6D705570 
+ 1920      00
+ 1921              	.LASF23:
+ 1922 017b 73745244 		.ascii	"stRDMManufacturer\000"
+ 1922      4D4D616E 
+ 1922      75666163 
+ 1922      74757265 
+ 1922      7200
+ 1923              	.LASF11:
+ 1924 018d 75696E74 		.ascii	"uint8\000"
+ 1924      3800
+ 1925              	.LASF21:
+ 1926 0193 73745244 		.ascii	"stRDMPersonality\000"
+ 1926      4D506572 
+ 1926      736F6E61 
+ 1926      6C697479 
+ 1926      00
+ 1927              	.LASF10:
+ 1928 01a4 75696E74 		.ascii	"uint16_t\000"
+ 1928      31365F74 
+ 1928      00
+ 1929              	.LASF85:
+ 1930 01ad 433A5C55 		.ascii	"C:\\Users\\jimvr\\Desktop\\Cineo_6Channel_Driver\\C"
+ 1930      73657273 
+ 1930      5C6A696D 
+ 1930      76725C44 
+ 1930      65736B74 
+ 1931 01db 696E656F 		.ascii	"ineo_6Channel_Driver\\ColorGenie6_RDMlib.cylib\000"
+ 1931      5F364368 
+ 1931      616E6E65 
+ 1931      6C5F4472 
+ 1931      69766572 
+ 1932              	.LASF13:
+ 1933 0209 75696E74 		.ascii	"uint32\000"
+ 1933      333200
+ 1934              	.LASF65:
+ 1935 0210 4973536C 		.ascii	"IsSlave\000"
+ 1935      61766500 
+ 1936              	.LASF50:
+ 1937 0218 444D5852 		.ascii	"DMXRxISRHandler\000"
+ 1937      78495352 
+ 1937      48616E64 
+ 1937      6C657200 
+ 1938              	.LASF28:
+ 1939 0228 42595445 		.ascii	"BYTE\000"
+ 1939      00
+ 1940              	.LASF8:
+ 1941 022d 756E7369 		.ascii	"unsigned int\000"
+ 1941      676E6564 
+ 1941      20696E74 
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 40
+
+
+ 1941      00
+ 1942              	.LASF59:
+ 1943 023a 63686563 		.ascii	"check_idx\000"
+ 1943      6B5F6964 
+ 1943      7800
+ 1944              	.LASF5:
+ 1945 0244 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1945      20756E73 
+ 1945      69676E65 
+ 1945      6420696E 
+ 1945      7400
+ 1946              	.LASF32:
+ 1947 0256 62794C69 		.ascii	"byLinearMode\000"
+ 1947      6E656172 
+ 1947      4D6F6465 
+ 1947      00
+ 1948              	.LASF67:
+ 1949 0263 444D585F 		.ascii	"DMX_UART_TX_STS_COMPLETE\000"
+ 1949      55415254 
+ 1949      5F54585F 
+ 1949      5354535F 
+ 1949      434F4D50 
+ 1950              	.LASF38:
+ 1951 027c 75695465 		.ascii	"uiTempTimer\000"
+ 1951      6D705469 
+ 1951      6D657200 
+ 1952              	.LASF54:
+ 1953 0288 655F5354 		.ascii	"e_START\000"
+ 1953      41525400 
+ 1954              	.LASF46:
+ 1955 0290 64617461 		.ascii	"data\000"
+ 1955      00
+ 1956              	.LASF3:
+ 1957 0295 73686F72 		.ascii	"short unsigned int\000"
+ 1957      7420756E 
+ 1957      7369676E 
+ 1957      65642069 
+ 1957      6E7400
+ 1958              	.LASF30:
+ 1959 02a8 62794375 		.ascii	"byCurrentSet\000"
+ 1959      7272656E 
+ 1959      74536574 
+ 1959      00
+ 1960              	.LASF81:
+ 1961 02b5 444D585F 		.ascii	"DMX_UART_ClearRxBuffer\000"
+ 1961      55415254 
+ 1961      5F436C65 
+ 1961      61725278 
+ 1961      42756666 
+ 1962              	.LASF34:
+ 1963 02cc 75695465 		.ascii	"uiTempTrip\000"
+ 1963      6D705472 
+ 1963      697000
+ 1964              	.LASF70:
+ 1965 02d7 444D585F 		.ascii	"DMX_UART_RX_STS_FIFO_NOTEMPTY\000"
+ 1965      55415254 
+ 1965      5F52585F 
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 41
+
+
+ 1965      5354535F 
+ 1965      4649464F 
+ 1966              	.LASF49:
+ 1967 02f5 7472616E 		.ascii	"transmitResponse\000"
+ 1967      736D6974 
+ 1967      52657370 
+ 1967      6F6E7365 
+ 1967      00
+ 1968              	.LASF18:
+ 1969 0306 73697A65 		.ascii	"sizetype\000"
+ 1969      74797065 
+ 1969      00
+ 1970              	.LASF37:
+ 1971 030f 666C5465 		.ascii	"flTempRampDown\000"
+ 1971      6D705261 
+ 1971      6D70446F 
+ 1971      776E00
+ 1972              	.LASF74:
+ 1973 031e 6279444D 		.ascii	"byDMXGood\000"
+ 1973      58476F6F 
+ 1973      6400
+ 1974              	.LASF58:
+ 1975 0328 63686563 		.ascii	"check_frame\000"
+ 1975      6B5F6672 
+ 1975      616D6500 
+ 1976              	.LASF62:
+ 1977 0334 73747275 		.ascii	"structeeprom\000"
+ 1977      63746565 
+ 1977      70726F6D 
+ 1977      00
+ 1978              	.LASF79:
+ 1979 0341 444D585F 		.ascii	"DMX_UART_PutArray\000"
+ 1979      55415254 
+ 1979      5F507574 
+ 1979      41727261 
+ 1979      7900
+ 1980              	.LASF53:
+ 1981 0353 655F4944 		.ascii	"e_IDLE\000"
+ 1981      4C4500
+ 1982              	.LASF14:
+ 1983 035a 666C6F61 		.ascii	"float\000"
+ 1983      7400
+ 1984              	.LASF41:
+ 1985 0360 62794545 		.ascii	"byEEPROMSave1\000"
+ 1985      50524F4D 
+ 1985      53617665 
+ 1985      3100
+ 1986              	.LASF42:
+ 1987 036e 62794545 		.ascii	"byEEPROMSave2\000"
+ 1987      50524F4D 
+ 1987      53617665 
+ 1987      3200
+ 1988              	.LASF43:
+ 1989 037c 73747275 		.ascii	"structInfo\000"
+ 1989      6374496E 
+ 1989      666F00
+ 1990              	.LASF29:
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 42
+
+
+ 1991 0387 7569444D 		.ascii	"uiDMXChannel\000"
+ 1991      58436861 
+ 1991      6E6E656C 
+ 1991      00
+ 1992              	.LASF82:
+ 1993 0394 52444D5F 		.ascii	"RDM_ResetState\000"
+ 1993      52657365 
+ 1993      74537461 
+ 1993      746500
+ 1994              	.LASF17:
+ 1995 03a3 72656738 		.ascii	"reg8\000"
+ 1995      00
+ 1996              	.LASF48:
+ 1997 03a8 69736272 		.ascii	"isbreak\000"
+ 1997      65616B00 
+ 1998              	.LASF27:
+ 1999 03b0 5F426F6F 		.ascii	"_Bool\000"
+ 1999      6C00
+ 2000              	.LASF1:
+ 2001 03b6 756E7369 		.ascii	"unsigned char\000"
+ 2001      676E6564 
+ 2001      20636861 
+ 2001      7200
+ 2002              	.LASF2:
+ 2003 03c4 73686F72 		.ascii	"short int\000"
+ 2003      7420696E 
+ 2003      7400
+ 2004              	.LASF72:
+ 2005 03ce 7569444D 		.ascii	"uiDMXLossTimer\000"
+ 2005      584C6F73 
+ 2005      7354696D 
+ 2005      657200
+ 2006              	.LASF78:
+ 2007 03dd 43794465 		.ascii	"CyDelayUs\000"
+ 2007      6C617955 
+ 2007      7300
+ 2008              	.LASF20:
+ 2009 03e7 7569444D 		.ascii	"uiDMXStartAddress\000"
+ 2009      58537461 
+ 2009      72744164 
+ 2009      64726573 
+ 2009      7300
+ 2010              	.LASF55:
+ 2011 03f9 655F4441 		.ascii	"e_DATA\000"
+ 2011      544100
+ 2012              	.LASF56:
+ 2013 0400 655F5244 		.ascii	"e_RDM\000"
+ 2013      4D00
+ 2014              	.LASF47:
+ 2015 0406 6C656E67 		.ascii	"length\000"
+ 2015      746800
+ 2016              	.LASF16:
+ 2017 040d 63686172 		.ascii	"char\000"
+ 2017      00
+ 2018              	.LASF33:
+ 2019 0412 62794469 		.ascii	"byDimFilter\000"
+ 2019      6D46696C 
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 43
+
+
+ 2019      74657200 
+ 2020              	.LASF9:
+ 2021 041e 5F5F7569 		.ascii	"__uint16_t\000"
+ 2021      6E743136 
+ 2021      5F7400
+ 2022              	.LASF39:
+ 2023 0429 756C5465 		.ascii	"ulTempCount\000"
+ 2023      6D70436F 
+ 2023      756E7400 
+ 2024              	.LASF19:
+ 2025 0435 52444D5F 		.ascii	"RDM_DevID\000"
+ 2025      44657649 
+ 2025      4400
+ 2026              	.LASF40:
+ 2027 043f 53617665 		.ascii	"SavedDMX_Value\000"
+ 2027      64444D58 
+ 2027      5F56616C 
+ 2027      756500
+ 2028              	.LASF86:
+ 2029 044e 6D656D63 		.ascii	"memcpy\000"
+ 2029      707900
+ 2030              	.LASF61:
+ 2031 0455 63686563 		.ascii	"check_val\000"
+ 2031      6B5F7661 
+ 2031      6C00
+ 2032              	.LASF69:
+ 2033 045f 444D585F 		.ascii	"DMX_UART_RX_STS_STOP_ERROR\000"
+ 2033      55415254 
+ 2033      5F52585F 
+ 2033      5354535F 
+ 2033      53544F50 
+ 2034              	.LASF64:
+ 2035 047a 6973496E 		.ascii	"isInTempFault\000"
+ 2035      54656D70 
+ 2035      4661756C 
+ 2035      7400
+ 2036              	.LASF66:
+ 2037 0488 444D585F 		.ascii	"DMX_UART_TXSTATUS\000"
+ 2037      55415254 
+ 2037      5F545853 
+ 2037      54415455 
+ 2037      5300
+ 2038              	.LASF84:
+ 2039 049a 646D782E 		.ascii	"dmx.c\000"
+ 2039      6300
+ 2040              	.LASF71:
+ 2041 04a0 444D585F 		.ascii	"DMX_UART_RXDATA\000"
+ 2041      55415254 
+ 2041      5F525844 
+ 2041      41544100 
+ 2042              	.LASF35:
+ 2043 04b0 666C426F 		.ascii	"flBottomTempRatio\000"
+ 2043      74746F6D 
+ 2043      54656D70 
+ 2043      52617469 
+ 2043      6F00
+ 2044              	.LASF24:
+ARM GAS  C:\Users\jimvr\AppData\Local\Temp\ccvj6NOo.s 			page 44
+
+
+ 2045 04c2 73745244 		.ascii	"stRDMModel\000"
+ 2045      4D4D6F64 
+ 2045      656C00
+ 2046              	.LASF22:
+ 2047 04cd 73745244 		.ascii	"stRDMIdentity\000"
+ 2047      4D496465 
+ 2047      6E746974 
+ 2047      7900
+ 2048              	.LASF77:
+ 2049 04db 444D585F 		.ascii	"DMX_Control_Reg_Write\000"
+ 2049      436F6E74 
+ 2049      726F6C5F 
+ 2049      5265675F 
+ 2049      57726974 
+ 2050              	.LASF80:
+ 2051 04f1 52444D5F 		.ascii	"RDM_AcceptByte\000"
+ 2051      41636365 
+ 2051      70744279 
+ 2051      746500
+ 2052              	.LASF15:
+ 2053 0500 646F7562 		.ascii	"double\000"
+ 2053      6C6500
+ 2054              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

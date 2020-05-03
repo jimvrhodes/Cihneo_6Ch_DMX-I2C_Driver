@@ -1,0 +1,2418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DesignWideResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://cypress.com/xsd/cydwr">
+  <Group key="Clock2">
+    <Data key="ClockSolver" value="1" />
+    <Group key="DesigneWideClks" />
+    <Group key="LocalClks">
+      <Group key="3624eb8f-1d13-4a8a-b1dd-75e05209eb00">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="NAMED_FREQ" />
+        <Data key="desired_freq" value="48" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="1" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="5" />
+        <Data key="name" value="ADIM_Clk" />
+        <Data key="named_src_direct_connect" value="False" />
+        <Data key="netlist_name" value="ADIM_Clk" />
+        <Data key="placement" value="AUTO" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="5" />
+        <Data key="scope" value="LOCAL" />
+        <Data key="src_clk_id" value="61737EF6-3B74-48f9-8B91-F7473A442AE7" />
+        <Data key="src_clk_name" value="MASTER_CLK" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="True" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="f6b0500f-a492-4f25-bb50-e3347ef0ca60">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="NAMED_FREQ" />
+        <Data key="desired_freq" value="48" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="1" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="5" />
+        <Data key="name" value="SDIM_Clk" />
+        <Data key="named_src_direct_connect" value="False" />
+        <Data key="netlist_name" value="SDIM_Clk" />
+        <Data key="placement" value="AUTO" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="5" />
+        <Data key="scope" value="LOCAL" />
+        <Data key="src_clk_id" value="61737EF6-3B74-48f9-8B91-F7473A442AE7" />
+        <Data key="src_clk_name" value="MASTER_CLK" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="True" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+    </Group>
+    <Group key="SourceClks" />
+    <Group key="SystemClks">
+      <Group key="1F7CF08C-1B36-4851-9441-035049A4211B">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="0" />
+        <Data key="desired_unit" value="0" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="False" />
+        <Data key="minus_accuracy" value="0" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="Digital Signal" />
+        <Data key="netlist_name" value="Digital_Signal" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="" />
+        <Data key="src_clk_name" value="" />
+        <Data key="start_on_reset" value="False" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="39D5E4C2-EBFC-44ab-AE3D-19F9BBFD674D">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="48" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="0" />
+        <Data key="enabled" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="PLL_OUT" />
+        <Data key="netlist_name" value="PLL_OUT" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="CEF43CFB-0213-49b9-B980-2FFAB81C5B47" />
+        <Data key="src_clk_name" value="IMO" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="46B167E3-1786-4598-8688-AACCF18668D4">
+        <Data key="check_tolerance" value="False" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="24" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="False" />
+        <Data key="minus_accuracy" value="0" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="XTAL" />
+        <Data key="netlist_name" value="XTAL" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="" />
+        <Data key="src_clk_name" value="" />
+        <Data key="start_on_reset" value="False" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+        <Data key="xtal_ampiadj" value="19" />
+        <Data key="xtal_ampiadj_customized" value="False" />
+        <Data key="xtal_automatic_gain_control" value="False" />
+        <Data key="xtal_crystal_accuracy_unit" value="Pct" />
+        <Data key="xtal_custom_timeout" value="130000" />
+        <Data key="xtal_enable_fault_recovery" value="False" />
+        <Data key="xtal_feedback_ref_level" value="3" />
+        <Data key="xtal_halt_on_eco_startup_error" value="True" />
+        <Data key="xtal_load_capacitance" value="12" />
+        <Data key="xtal_ref_level_customized" value="False" />
+        <Data key="xtal_shunt_capacitance" value="7" />
+        <Data key="xtal_use_custom_timeout" value="False" />
+        <Data key="xtal_use_osc_volt_pumps" value="False" />
+        <Data key="xtal_watchdog_ref_level" value="3" />
+      </Group>
+      <Group key="75C2148C-3656-4d8a-846D-0CAE99AB6FF7">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clk_key_bus_usedivider" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="0" />
+        <Data key="desired_unit" value="0" />
+        <Data key="divider" value="1" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="BUS_CLK" />
+        <Data key="netlist_name" value="BUS_CLK" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="61737EF6-3B74-48f9-8B91-F7473A442AE7" />
+        <Data key="src_clk_name" value="MASTER_CLK" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="True" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="61737EF6-3B74-48f9-8B91-F7473A442AE7">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="0" />
+        <Data key="desired_unit" value="0" />
+        <Data key="divider" value="1" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="True" />
+        <Data key="master_divider_used" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="MASTER_CLK" />
+        <Data key="netlist_name" value="MASTER_CLK" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="39D5E4C2-EBFC-44ab-AE3D-19F9BBFD674D" />
+        <Data key="src_clk_name" value="PLL_OUT" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="True" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="96816ED8-BCFA-4aad-B6AF-0E41C02E8C31">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clk_key_usb_imox2" value="True" />
+        <Data key="clk_key_usb_usedivider" value="False" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="48" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="1" />
+        <Data key="domain" value="0" />
+        <Data key="enabled" value="True" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="USB_CLK" />
+        <Data key="netlist_name" value="USB_CLK" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="CEF43CFB-0213-49b9-B980-2FFAB81C5B47" />
+        <Data key="src_clk_name" value="IMO" />
+        <Data key="start_on_reset" value="False" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="315365C3-2E3E-4f04-84A2-BB564A173261">
+        <Data key="check_tolerance" value="False" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="0" />
+        <Data key="desired_unit" value="0" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="0" />
+        <Data key="enabled" value="True" />
+        <Data key="ilo_1k_enabled" value="True" />
+        <Data key="ilo_33k_enabled" value="False" />
+        <Data key="ilo_100k_enabled" value="True" />
+        <Data key="ilo_oscillator" value="ILO_100kHz" />
+        <Data key="minus_accuracy" value="55" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="ILO" />
+        <Data key="netlist_name" value="ILO" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="100" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="" />
+        <Data key="src_clk_name" value="" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="CEF43CFB-0213-49b9-B980-2FFAB81C5B47">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="24" />
+        <Data key="desired_unit" value="6" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="0" />
+        <Data key="enabled" value="True" />
+        <Data key="imo_doubler" value="False" />
+        <Data key="imo_oscillator" value="IMO_24MHZ" />
+        <Data key="minus_accuracy" value="0.25" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="IMO" />
+        <Data key="netlist_name" value="IMO" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0.25" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="" />
+        <Data key="src_clk_name" value="" />
+        <Data key="start_on_reset" value="True" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+      </Group>
+      <Group key="EC9D9168-D68F-4573-AC21-F93D3BF005CD">
+        <Data key="check_tolerance" value="True" />
+        <Data key="clock_version" value="v1" />
+        <Data key="derive_type" value="BUILTIN" />
+        <Data key="desired_freq" value="32.768" />
+        <Data key="desired_unit" value="3" />
+        <Data key="divider" value="0" />
+        <Data key="domain" value="DIGITAL" />
+        <Data key="enabled" value="False" />
+        <Data key="minus_accuracy" value="0" />
+        <Data key="minus_tolerance" value="0" />
+        <Data key="name" value="XTAL 32kHz" />
+        <Data key="netlist_name" value="XTAL_32KHZ" />
+        <Data key="placement" value="GLOBAL" />
+        <Data key="plus_accuracy" value="0" />
+        <Data key="plus_tolerance" value="0" />
+        <Data key="scope" value="BUILTIN" />
+        <Data key="src_clk_id" value="" />
+        <Data key="src_clk_name" value="" />
+        <Data key="start_on_reset" value="False" />
+        <Data key="sync_with_bus_clk" value="False" />
+        <Data key="user_set_domain" value="False" />
+        <Data key="xtal_minus_Crystal_acuracy_name" value="0" />
+        <Data key="xtal_plus_crystal_acuracy_name" value="0" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Component">
+    <Group key="v1">
+      <Data key="cy_boot" value="cy_boot_v5_60" />
+      <Data key="LIN_Dynamic" value="LIN_Dynamic_v4_0" />
+    </Group>
+  </Group>
+  <Data key="DataVersionKey" value="2" />
+  <Group key="DWRInstGuidMapping">
+    <Group key="Clock">
+      <Data key="3624eb8f-1d13-4a8a-b1dd-75e05209eb00" value="ADIM_Clk" />
+      <Data key="f6b0500f-a492-4f25-bb50-e3347ef0ca60" value="SDIM_Clk" />
+    </Group>
+    <Group key="Interrupt">
+      <Data key="7bb87921-ebc0-4f96-a510-8963bb07364b" value="ADIM_isr" />
+      <Data key="abb0656f-6712-4b1a-9e9c-004837c472c9" value="DMXIsr" />
+      <Data key="ca1ec313-5b6a-4d78-a4cc-e0af34f0aa05" value="PWMDIM_isr" />
+      <Data key="d0073cce-b91e-4c3c-9c6b-324b039c33b9/b73dcd38-4bce-4cd7-acec-33f53e91ccd6" value="ADC_IRQ" />
+      <Data key="dfb150b6-a1d0-4b57-8da1-792937f4caac/eb34254f-7e25-4f08-a75f-35746c277a91" value="EZI2C_isr" />
+      <Data key="dfca2eec-3a71-4e2a-a649-c6c64d6d1dc7" value="Timer_1MS_ISR" />
+      <Data key="f1b7f1fa-453d-4259-95ef-bef02b3b8298" value="FAN_Alert_isr" />
+    </Group>
+    <Group key="Pin">
+      <Data key="01b175ca-1dd6-4524-b6e0-1635dde00168" value="DMXDIR" />
+      <Data key="2a591dbc-eec4-4865-a9a4-71011728d3d6" value="DIPSW3" />
+      <Data key="2afaabc4-5041-46aa-8e18-27b181f74969" value="wLED_GREEN" />
+      <Data key="2d2c0960-1064-4bd5-9ded-08103b01fcd8" value="TACH4" />
+      <Data key="2f43f52d-9d4a-48a3-981b-c54df4635f15" value="ADIM_6" />
+      <Data key="3ad38cfe-98a8-4703-8075-15e9bd5532e0" value="PWMFAN3" />
+      <Data key="3af774e6-8111-4134-845d-ccdd30cc8d8b" value="EXT_TEMP" />
+      <Data key="4a51091d-3e2e-4747-be83-602f016c99f0" value="PINCHFET1" />
+      <Data key="7a0523e1-920f-4160-b05a-109686625725" value="wDMX_pin4" />
+      <Data key="8a95e6c7-5339-4330-b401-1e9321533842" value="TACH2" />
+      <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="DIPSW0" />
+      <Data key="08f46180-08c0-4829-b111-b32fbe54b1a8" value="PINCHFET4" />
+      <Data key="9a5461e9-7ba2-4dd2-bb97-be72f7e50df5" value="Extra_1" />
+      <Data key="14ed537b-9019-40f7-b7af-7c4cddd8292f" value="ADIM_1" />
+      <Data key="21ba0bfc-abd1-472c-af66-d5f921d24a2f" value="PINCHFET3" />
+      <Data key="028d051b-cc8c-4442-b91f-f345050fd7cc" value="Extra_7" />
+      <Data key="29ff2f05-865b-4122-b92d-f57f250bee5d" value="Extra_2" />
+      <Data key="34b674e5-fcb8-4bf2-9017-9f4c60353274" value="DIPSW1" />
+      <Data key="34cfed22-c960-4363-8ecf-2f6fc0d15200" value="I2C" />
+      <Data key="51a8ca0c-dcf5-442f-a82b-51156519246a" value="wLED_BLUE" />
+      <Data key="56cda36e-b517-49c5-b626-4f5d1a6e6057" value="PWMFAN4" />
+      <Data key="56eb6038-fdf6-4d8f-a93c-97d353cfede8" value="Extra_4" />
+      <Data key="65a66136-712b-468a-b381-598a708c83b9" value="SDIM_6" />
+      <Data key="72dca5b1-4d41-4de8-b0f6-d38ea1ae37b7" value="OFF4" />
+      <Data key="77ac2aec-dcca-4943-ad11-e1474bf100f7" value="PWMFAN2" />
+      <Data key="82f33340-7bbb-434c-8c0e-2cce0c7d528e" value="SDIM_5" />
+      <Data key="83ace341-4c45-48f6-bd76-aa5d48096716" value="OFF7" />
+      <Data key="86a2c476-e9c1-4f87-bb07-91d2d4ac717d" value="SDIM_2" />
+      <Data key="87b9f893-d64a-415a-b616-ea3f120259e7" value="ADIM_7" />
+      <Data key="99e75abb-92d9-4743-90ec-ee336580b28f" value="OFF2" />
+      <Data key="450fc5dd-b2e5-4d64-b7bf-c7f12b9a2d46" value="LED_RED" />
+      <Data key="527fd128-740a-4075-9bbf-9e48acd41dda" value="PINCHFET2" />
+      <Data key="590e8230-960a-48e4-8dbe-15a9b375c0cc" value="OFF6" />
+      <Data key="702e015c-10dd-415b-a527-43a9499b797e" value="ADIM_4" />
+      <Data key="755e6d07-faf6-4c0e-ab3b-4a21876bc81a" value="OFF1" />
+      <Data key="941d5735-a740-4e2d-9324-8de1d7031ef1" value="SDIM_7" />
+      <Data key="2577fc64-f9d7-43f9-8794-76802fb8ef35" value="TACH2" />
+      <Data key="4081ccb1-43bc-4592-9d84-de4b4eee1dc0" value="PINCHFET6" />
+      <Data key="5519e91f-0593-4457-b51c-ad569ba6c066" value="VSENSE" />
+      <Data key="5657b954-70c7-4103-83bd-5eecdcabfb0c" value="EXT_TEMP2" />
+      <Data key="6654aea9-e7f5-4e9a-87ce-021f8f1fce35" value="LEDSENSE1" />
+      <Data key="7439c884-c1a9-4c99-9e78-f2f1b52c7374" value="SDIM_4" />
+      <Data key="8100da78-005b-470a-b540-49c010140985" value="wDMX_pin8" />
+      <Data key="12798c0f-7873-4505-affb-05f51f6fd132" value="ADIM_5" />
+      <Data key="48298bb1-c98f-4a87-9a8b-f22bdd045860" value="PWMFAN2" />
+      <Data key="52808b2d-51b0-4287-a803-3f62670ae889" value="wDMX_pin12" />
+      <Data key="55115ead-2155-4603-84fc-6a7dc13b72bb" value="EXT_TEMP3" />
+      <Data key="126852aa-1bb0-4df9-a249-81da08e325ae" value="wDMX_pin2" />
+      <Data key="1425177d-0d0e-4468-8bcc-e638e5509a9b" value="DMXRX" />
+      <Data key="2280405c-2d43-4b81-875d-f7c46e5e8571" value="wDMX_pin10" />
+      <Data key="5488898d-9de4-467a-b223-732a813fde1c" value="Extra_5" />
+      <Data key="06011500-de71-4d3b-8f07-b33ed11a64e2" value="wLED" />
+      <Data key="52926643-f338-4d5e-989e-7582c52abecb" value="TACH3" />
+      <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="TEMP" />
+      <Data key="a4d4c40d-c77d-42d2-8d80-02236e720f87" value="SDIM_1" />
+      <Data key="a121061b-4c79-4447-a71c-bc9d26820798" value="OFF5" />
+      <Data key="aa6e730b-7af7-4112-ae93-f75fcb6915dd" value="SDIM_3" />
+      <Data key="ab201f17-593b-4585-96e2-e4690fb6ba50" value="LEDSENSE2" />
+      <Data key="b0bebb56-6bcc-431d-94cf-8b3fceef7b89" value="DIM_POT" />
+      <Data key="b0eec506-3265-4fc6-a0fd-4618101cf8b6" value="OFF3" />
+      <Data key="bfcf0579-4818-4542-a164-96c3d129c8dc" value="wLED_RED" />
+      <Data key="c3f61fa6-64b3-4ec6-bcec-8cefcacbcaa2" value="EXT_TEMP4" />
+      <Data key="c56d348a-eae4-4d7b-8da2-2d100cb74542" value="PINCHFET7" />
+      <Data key="c782626f-3e6c-4bd8-a3c8-36c1b2e07189" value="wDMX_pin3" />
+      <Data key="caf67277-ddeb-47d4-a068-93329037b2f0/8b77a6c4-10a0-4390-971c-672353e2a49c" value="USBFS_Dm" />
+      <Data key="caf67277-ddeb-47d4-a068-93329037b2f0/618a72fc-5ddd-4df5-958f-a3d55102db42" value="USBFS_Dp" />
+      <Data key="cc4093a3-fa68-45b1-a4e8-26cf96955605" value="Extra_6" />
+      <Data key="cda79fb1-91a5-48a8-b67e-4d248b74749a" value="TACH1" />
+      <Data key="d3da9f6b-c389-4556-a323-794b7bbeffe3" value="PWMFAN1" />
+      <Data key="d0073cce-b91e-4c3c-9c6b-324b039c33b9/16a808f6-2e13-45b9-bce0-b001c8655113" value="ADC_Bypass" />
+      <Data key="d359a1b0-b75a-4272-b1a2-fa5824acac76" value="PINCHFET5" />
+      <Data key="e8c204fc-05ae-4e0e-ae53-9001a5a83cb3" value="ADIM_2" />
+      <Data key="e97d50ad-5f3c-418f-8b32-b37893e9c936" value="Extra_3" />
+      <Data key="e357f214-9f23-4ccc-bba7-ab9146084304" value="DIPSW2" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="LED_BLUE" />
+      <Data key="e52273a8-aa06-4122-8ecd-4b173903f38c" value="wDMX_pin11" />
+      <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="DMXTX" />
+      <Data key="f1c0d91b-bde2-4453-bd10-f3df1113ef5b" value="wDMX_pin9" />
+      <Data key="f3b6f567-a703-46b7-a857-bd1a51387d23" value="ADIM_3" />
+      <Data key="f3c6332c-6c8e-4b32-aa52-d8e54db5151c" value="LED_GREEN" />
+    </Group>
+  </Group>
+  <Group key="EEPROM">
+    <Data key="DataKey" value="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" />
+    <Data key="InHexFileKey" value="False" />
+  </Group>
+  <Group key="FlashSecurity">
+    <Group key="RowsKey">
+      <Group key="0">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="1">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="2">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="3">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="4">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="5">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="6">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="7">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="8">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="9">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="10">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="11">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="12">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="13">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="14">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="15">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="16">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="17">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="18">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="19">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="20">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="21">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="22">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="23">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="24">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="25">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="26">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="27">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="28">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="29">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="30">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="31">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="32">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="33">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="34">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="35">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="36">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="37">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="38">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="39">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="40">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="41">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="42">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="43">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="44">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="45">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="46">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="47">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="48">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="49">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="50">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="51">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="52">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="53">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="54">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="55">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="56">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="57">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="58">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="59">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="60">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="61">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="62">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="63">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="64">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="65">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="66">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="67">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="68">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="69">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="70">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="71">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="72">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="73">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="74">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="75">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="76">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="77">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="78">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="79">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="80">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="81">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="82">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="83">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="84">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="85">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="86">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="87">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="88">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="89">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="90">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="91">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="92">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="93">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="94">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="95">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="96">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="97">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="98">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="99">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="100">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="101">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="102">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="103">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="104">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="105">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="106">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="107">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="108">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="109">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="110">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="111">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="112">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="113">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="114">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="115">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="116">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="117">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="118">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="119">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="120">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="121">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="122">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="123">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="124">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="125">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="126">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="127">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="128">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="129">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="130">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="131">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="132">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="133">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="134">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="135">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="136">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="137">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="138">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="139">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="140">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="141">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="142">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="143">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="144">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="145">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="146">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="147">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="148">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="149">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="150">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="151">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="152">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="153">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="154">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="155">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="156">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="157">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="158">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="159">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="160">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="161">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="162">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="163">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="164">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="165">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="166">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="167">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="168">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="169">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="170">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="171">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="172">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="173">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="174">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="175">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="176">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="177">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="178">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="179">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="180">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="181">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="182">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="183">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="184">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="185">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="186">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="187">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="188">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="189">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="190">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="191">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="192">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="193">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="194">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="195">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="196">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="197">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="198">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="199">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="200">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="201">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="202">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="203">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="204">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="205">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="206">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="207">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="208">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="209">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="210">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="211">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="212">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="213">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="214">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="215">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="216">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="217">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="218">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="219">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="220">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="221">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="222">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="223">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="224">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="225">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="226">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="227">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="228">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="229">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="230">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="231">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="232">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="233">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="234">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="235">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="236">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="237">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="238">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="239">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="240">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="241">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="242">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="243">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="244">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="245">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="246">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="247">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="248">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="249">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="250">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="251">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="252">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="253">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="254">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="255">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="256">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="257">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="258">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="259">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="260">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="261">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="262">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="263">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="264">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="265">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="266">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="267">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="268">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="269">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="270">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="271">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="272">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="273">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="274">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="275">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="276">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="277">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="278">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="279">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="280">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="281">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="282">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="283">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="284">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="285">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="286">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="287">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="288">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="289">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="290">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="291">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="292">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="293">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="294">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="295">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="296">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="297">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="298">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="299">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="300">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="301">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="302">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="303">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="304">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="305">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="306">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="307">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="308">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="309">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="310">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="311">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="312">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="313">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="314">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="315">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="316">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="317">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="318">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="319">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="320">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="321">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="322">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="323">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="324">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="325">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="326">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="327">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="328">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="329">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="330">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="331">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="332">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="333">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="334">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="335">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="336">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="337">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="338">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="339">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="340">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="341">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="342">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="343">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="344">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="345">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="346">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="347">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="348">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="349">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="350">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="351">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="352">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="353">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="354">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="355">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="356">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="357">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="358">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="359">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="360">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="361">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="362">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="363">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="364">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="365">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="366">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="367">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="368">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="369">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="370">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="371">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="372">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="373">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="374">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="375">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="376">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="377">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="378">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="379">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="380">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="381">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="382">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="383">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="384">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="385">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="386">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="387">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="388">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="389">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="390">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="391">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="392">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="393">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="394">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="395">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="396">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="397">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="398">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="399">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="400">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="401">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="402">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="403">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="404">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="405">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="406">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="407">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="408">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="409">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="410">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="411">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="412">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="413">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="414">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="415">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="416">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="417">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="418">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="419">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="420">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="421">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="422">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="423">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="424">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="425">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="426">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="427">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="428">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="429">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="430">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="431">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="432">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="433">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="434">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="435">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="436">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="437">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="438">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="439">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="440">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="441">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="442">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="443">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="444">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="445">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="446">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="447">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="448">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="449">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="450">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="451">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="452">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="453">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="454">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="455">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="456">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="457">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="458">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="459">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="460">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="461">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="462">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="463">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="464">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="465">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="466">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="467">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="468">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="469">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="470">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="471">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="472">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="473">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="474">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="475">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="476">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="477">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="478">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="479">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="480">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="481">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="482">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="483">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="484">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="485">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="486">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="487">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="488">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="489">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="490">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="491">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="492">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="493">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="494">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="495">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="496">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="497">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="498">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="499">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="500">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="501">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="502">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="503">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="504">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="505">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="506">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="507">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="508">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="509">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="510">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="511">
+        <Data key="LevelKey" value="00" />
+      </Group>
+      <Group key="512">
+        <Data key="LevelKey" value="00" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Interrupt">
+    <Group key="7bb87921-ebc0-4f96-a510-8963bb07364b">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="1" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="abb0656f-6712-4b1a-9e9c-004837c472c9">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="0" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="ca1ec313-5b6a-4d78-a4cc-e0af34f0aa05">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="1" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="dfb150b6-a1d0-4b57-8da1-792937f4caac/eb34254f-7e25-4f08-a75f-35746c277a91">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="2" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="dfca2eec-3a71-4e2a-a649-c6c64d6d1dc7">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="2" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+    <Group key="f1b7f1fa-453d-4259-95ef-bef02b3b8298">
+      <Group key="CortexM3">
+        <Data key="Assigned" value="True" />
+        <Data key="Priority" value="3" />
+        <Data key="Vector" value="-1" />
+      </Group>
+    </Group>
+  </Group>
+  <Group key="Pin2">
+    <Group key="01b175ca-1dd6-4524-b6e0-1635dde00168">
+      <Group key="0">
+        <Data key="Port Format" value="15,2" />
+      </Group>
+    </Group>
+    <Group key="2a591dbc-eec4-4865-a9a4-71011728d3d6">
+      <Group key="0">
+        <Data key="Port Format" value="15,1" />
+      </Group>
+    </Group>
+    <Group key="2afaabc4-5041-46aa-8e18-27b181f74969">
+      <Group key="0">
+        <Data key="Port Format" value="5,3" />
+      </Group>
+    </Group>
+    <Group key="2d2c0960-1064-4bd5-9ded-08103b01fcd8">
+      <Group key="0">
+        <Data key="Port Format" value="15,1" />
+      </Group>
+    </Group>
+    <Group key="2f43f52d-9d4a-48a3-981b-c54df4635f15">
+      <Group key="0">
+        <Data key="Port Format" value="0,1" />
+      </Group>
+    </Group>
+    <Group key="3ad38cfe-98a8-4703-8075-15e9bd5532e0">
+      <Group key="0">
+        <Data key="Port Format" value="3,0" />
+      </Group>
+    </Group>
+    <Group key="3af774e6-8111-4134-845d-ccdd30cc8d8b">
+      <Group key="0">
+        <Data key="Port Format" value="2,4" />
+      </Group>
+    </Group>
+    <Group key="4a51091d-3e2e-4747-be83-602f016c99f0">
+      <Group key="0">
+        <Data key="Port Format" value="6,7" />
+      </Group>
+    </Group>
+    <Group key="7a0523e1-920f-4160-b05a-109686625725">
+      <Group key="0">
+        <Data key="Port Format" value="5,0" />
+      </Group>
+    </Group>
+    <Group key="8a95e6c7-5339-4330-b401-1e9321533842">
+      <Group key="0">
+        <Data key="Port Format" value="12,0" />
+      </Group>
+    </Group>
+    <Group key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba">
+      <Group key="0">
+        <Data key="Port Format" value="5,4" />
+      </Group>
+    </Group>
+    <Group key="08f46180-08c0-4829-b111-b32fbe54b1a8">
+      <Group key="0">
+        <Data key="Port Format" value="15,4" />
+      </Group>
+    </Group>
+    <Group key="9a5461e9-7ba2-4dd2-bb97-be72f7e50df5">
+      <Group key="0">
+        <Data key="Port Format" value="0,7" />
+      </Group>
+    </Group>
+    <Group key="14ed537b-9019-40f7-b7af-7c4cddd8292f">
+      <Group key="0">
+        <Data key="Port Format" value="1,4" />
+      </Group>
+    </Group>
+    <Group key="21ba0bfc-abd1-472c-af66-d5f921d24a2f">
+      <Group key="0">
+        <Data key="Port Format" value="4,7" />
+      </Group>
+    </Group>
+    <Group key="028d051b-cc8c-4442-b91f-f345050fd7cc">
+      <Group key="0">
+        <Data key="Port Format" value="4,7" />
+      </Group>
+    </Group>
+    <Group key="29ff2f05-865b-4122-b92d-f57f250bee5d">
+      <Group key="0">
+        <Data key="Port Format" value="4,2" />
+      </Group>
+    </Group>
+    <Group key="34b674e5-fcb8-4bf2-9017-9f4c60353274">
+      <Group key="0">
+        <Data key="Port Format" value="5,5" />
+      </Group>
+    </Group>
+    <Group key="34cfed22-c960-4363-8ecf-2f6fc0d15200">
+      <Group key="0">
+        <Data key="Port Format" value="12,4" />
+      </Group>
+      <Group key="1">
+        <Data key="Port Format" value="12,5" />
+      </Group>
+    </Group>
+    <Group key="51a8ca0c-dcf5-442f-a82b-51156519246a">
+      <Group key="0">
+        <Data key="Port Format" value="5,2" />
+      </Group>
+    </Group>
+    <Group key="56cda36e-b517-49c5-b626-4f5d1a6e6057">
+      <Group key="0">
+        <Data key="Port Format" value="15,0" />
+      </Group>
+    </Group>
+    <Group key="56eb6038-fdf6-4d8f-a93c-97d353cfede8">
+      <Group key="0">
+        <Data key="Port Format" value="4,4" />
+      </Group>
+    </Group>
+    <Group key="72dca5b1-4d41-4de8-b0f6-d38ea1ae37b7">
+      <Group key="0">
+        <Data key="Port Format" value="6,3" />
+      </Group>
+    </Group>
+    <Group key="77ac2aec-dcca-4943-ad11-e1474bf100f7">
+      <Group key="0">
+        <Data key="Port Format" value="12,0" />
+      </Group>
+    </Group>
+    <Group key="83ace341-4c45-48f6-bd76-aa5d48096716">
+      <Group key="0">
+        <Data key="Port Format" value="0,3" />
+      </Group>
+    </Group>
+    <Group key="87b9f893-d64a-415a-b616-ea3f120259e7">
+      <Group key="0">
+        <Data key="Port Format" value="0,5" />
+      </Group>
+    </Group>
+    <Group key="99e75abb-92d9-4743-90ec-ee336580b28f">
+      <Group key="0">
+        <Data key="Port Format" value="2,5" />
+      </Group>
+    </Group>
+    <Group key="450fc5dd-b2e5-4d64-b7bf-c7f12b9a2d46">
+      <Group key="0">
+        <Data key="Port Format" value="1,7" />
+      </Group>
+    </Group>
+    <Group key="527fd128-740a-4075-9bbf-9e48acd41dda">
+      <Group key="0">
+        <Data key="Port Format" value="2,6" />
+      </Group>
+    </Group>
+    <Group key="590e8230-960a-48e4-8dbe-15a9b375c0cc">
+      <Group key="0">
+        <Data key="Port Format" value="4,4" />
+      </Group>
+    </Group>
+    <Group key="702e015c-10dd-415b-a527-43a9499b797e">
+      <Group key="0">
+        <Data key="Port Format" value="6,4" />
+      </Group>
+    </Group>
+    <Group key="755e6d07-faf6-4c0e-ab3b-4a21876bc81a">
+      <Group key="0">
+        <Data key="Port Format" value="5,1" />
+      </Group>
+    </Group>
+    <Group key="941d5735-a740-4e2d-9324-8de1d7031ef1">
+      <Group key="0">
+        <Data key="Port Format" value="0,7" />
+      </Group>
+    </Group>
+    <Group key="2577fc64-f9d7-43f9-8794-76802fb8ef35">
+      <Group key="0">
+        <Data key="Port Format" value="12,1" />
+      </Group>
+    </Group>
+    <Group key="4081ccb1-43bc-4592-9d84-de4b4eee1dc0">
+      <Group key="0">
+        <Data key="Port Format" value="4,5" />
+      </Group>
+    </Group>
+    <Group key="5519e91f-0593-4457-b51c-ad569ba6c066">
+      <Group key="0">
+        <Data key="Port Format" value="0,0" />
+      </Group>
+    </Group>
+    <Group key="5657b954-70c7-4103-83bd-5eecdcabfb0c">
+      <Group key="0">
+        <Data key="Port Format" value="2,7" />
+      </Group>
+    </Group>
+    <Group key="6654aea9-e7f5-4e9a-87ce-021f8f1fce35">
+      <Group key="0">
+        <Data key="Port Format" value="6,6" />
+      </Group>
+    </Group>
+    <Group key="8100da78-005b-470a-b540-49c010140985">
+      <Group key="0">
+        <Data key="Port Format" value="5,4" />
+      </Group>
+    </Group>
+    <Group key="12798c0f-7873-4505-affb-05f51f6fd132">
+      <Group key="0">
+        <Data key="Port Format" value="0,2" />
+      </Group>
+    </Group>
+    <Group key="48298bb1-c98f-4a87-9a8b-f22bdd045860">
+      <Group key="0">
+        <Data key="Port Format" value="12,1" />
+      </Group>
+    </Group>
+    <Group key="55115ead-2155-4603-84fc-6a7dc13b72bb">
+      <Group key="0">
+        <Data key="Port Format" value="6,4" />
+      </Group>
+    </Group>
+    <Group key="126852aa-1bb0-4df9-a249-81da08e325ae">
+      <Group key="0">
+        <Data key="Port Format" value="6,6" />
+      </Group>
+    </Group>
+    <Group key="1425177d-0d0e-4468-8bcc-e638e5509a9b">
+      <Group key="0">
+        <Data key="Port Format" value="15,3" />
+      </Group>
+    </Group>
+    <Group key="5488898d-9de4-467a-b223-732a813fde1c">
+      <Group key="0">
+        <Data key="Port Format" value="4,5" />
+      </Group>
+    </Group>
+    <Group key="06011500-de71-4d3b-8f07-b33ed11a64e2">
+      <Group key="0">
+        <Data key="Port Format" value="12,4" />
+      </Group>
+    </Group>
+    <Group key="52926643-f338-4d5e-989e-7582c52abecb">
+      <Group key="0">
+        <Data key="Port Format" value="3,1" />
+      </Group>
+    </Group>
+    <Group key="77715107-f8d5-47e5-a629-0fb83101ac6b">
+      <Group key="0">
+        <Data key="Port Format" value="2,7" />
+      </Group>
+    </Group>
+    <Group key="a121061b-4c79-4447-a71c-bc9d26820798">
+      <Group key="0">
+        <Data key="Port Format" value="4,2" />
+      </Group>
+    </Group>
+    <Group key="ab201f17-593b-4585-96e2-e4690fb6ba50">
+      <Group key="0">
+        <Data key="Port Format" value="6,5" />
+      </Group>
+    </Group>
+    <Group key="b0bebb56-6bcc-431d-94cf-8b3fceef7b89">
+      <Group key="0">
+        <Data key="Port Format" value="1,4" />
+      </Group>
+    </Group>
+    <Group key="b0eec506-3265-4fc6-a0fd-4618101cf8b6">
+      <Group key="0">
+        <Data key="Port Format" value="4,6" />
+      </Group>
+    </Group>
+    <Group key="bfcf0579-4818-4542-a164-96c3d129c8dc">
+      <Group key="0">
+        <Data key="Port Format" value="2,2" />
+      </Group>
+    </Group>
+    <Group key="c3f61fa6-64b3-4ec6-bcec-8cefcacbcaa2">
+      <Group key="0">
+        <Data key="Port Format" value="2,6" />
+      </Group>
+    </Group>
+    <Group key="c56d348a-eae4-4d7b-8da2-2d100cb74542">
+      <Group key="0">
+        <Data key="Port Format" value="4,5" />
+      </Group>
+    </Group>
+    <Group key="c782626f-3e6c-4bd8-a3c8-36c1b2e07189">
+      <Group key="0">
+        <Data key="Port Format" value="6,7" />
+      </Group>
+    </Group>
+    <Group key="caf67277-ddeb-47d4-a068-93329037b2f0/8b77a6c4-10a0-4390-971c-672353e2a49c">
+      <Group key="0">
+        <Data key="Port Format" value="15,7" />
+      </Group>
+    </Group>
+    <Group key="caf67277-ddeb-47d4-a068-93329037b2f0/618a72fc-5ddd-4df5-958f-a3d55102db42">
+      <Group key="0">
+        <Data key="Port Format" value="15,6" />
+      </Group>
+    </Group>
+    <Group key="cc4093a3-fa68-45b1-a4e8-26cf96955605">
+      <Group key="0">
+        <Data key="Port Format" value="4,6" />
+      </Group>
+    </Group>
+    <Group key="cda79fb1-91a5-48a8-b67e-4d248b74749a">
+      <Group key="0">
+        <Data key="Port Format" value="3,7" />
+      </Group>
+    </Group>
+    <Group key="d3da9f6b-c389-4556-a323-794b7bbeffe3">
+      <Group key="0">
+        <Data key="Port Format" value="3,6" />
+      </Group>
+    </Group>
+    <Group key="d0073cce-b91e-4c3c-9c6b-324b039c33b9/16a808f6-2e13-45b9-bce0-b001c8655113">
+      <Group key="0">
+        <Data key="Port Format" value="0,4" />
+      </Group>
+    </Group>
+    <Group key="d359a1b0-b75a-4272-b1a2-fa5824acac76">
+      <Group key="0">
+        <Data key="Port Format" value="4,3" />
+      </Group>
+    </Group>
+    <Group key="e8c204fc-05ae-4e0e-ae53-9001a5a83cb3">
+      <Group key="0">
+        <Data key="Port Format" value="1,2" />
+      </Group>
+    </Group>
+    <Group key="e97d50ad-5f3c-418f-8b32-b37893e9c936">
+      <Group key="0">
+        <Data key="Port Format" value="4,3" />
+      </Group>
+    </Group>
+    <Group key="e357f214-9f23-4ccc-bba7-ab9146084304">
+      <Group key="0">
+        <Data key="Port Format" value="5,6" />
+      </Group>
+    </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="1,6" />
+      </Group>
+    </Group>
+    <Group key="e52273a8-aa06-4122-8ecd-4b173903f38c">
+      <Group key="0">
+        <Data key="Port Format" value="5,1" />
+      </Group>
+    </Group>
+    <Group key="ed092b9b-d398-4703-be89-cebf998501f6">
+      <Group key="0">
+        <Data key="Port Format" value="3,6" />
+      </Group>
+    </Group>
+    <Group key="f3b6f567-a703-46b7-a857-bd1a51387d23">
+      <Group key="0">
+        <Data key="Port Format" value="4,0" />
+      </Group>
+    </Group>
+    <Group key="f3c6332c-6c8e-4b32-aa52-d8e54db5151c">
+      <Group key="0">
+        <Data key="Port Format" value="12,6" />
+      </Group>
+    </Group>
+    <Group key="UnAssigned Pins">
+      <Group key="65a66136-712b-468a-b381-598a708c83b9">
+        <Data key="0" value="132284428808676758" />
+      </Group>
+      <Group key="82f33340-7bbb-434c-8c0e-2cce0c7d528e">
+        <Data key="0" value="132284428377351440" />
+      </Group>
+      <Group key="52808b2d-51b0-4287-a803-3f62670ae889">
+        <Data key="0" value="132045917482611771" />
+      </Group>
+      <Group key="2280405c-2d43-4b81-875d-f7c46e5e8571">
+        <Data key="0" value="132045892939718883" />
+      </Group>
+      <Group key="a4d4c40d-c77d-42d2-8d80-02236e720f87">
+        <Data key="0" value="132284427894913308" />
+      </Group>
+      <Group key="f1c0d91b-bde2-4453-bd10-f3df1113ef5b">
+        <Data key="0" value="132045893226633758" />
+      </Group>
+    </Group>
+    <Group key="Unlocked Pins">
+      <Group key="86a2c476-e9c1-4f87-bb07-91d2d4ac717d">
+        <Group key="0">
+          <Group key="132284426418869768">
+            <Data key="Port Format" value="5,0" />
+          </Group>
+        </Group>
+      </Group>
+      <Group key="7439c884-c1a9-4c99-9e78-f2f1b52c7374">
+        <Group key="0">
+          <Group key="132284426442528480">
+            <Data key="Port Format" value="6,2" />
+          </Group>
+        </Group>
+      </Group>
+      <Group key="aa6e730b-7af7-4112-ae93-f75fcb6915dd">
+        <Group key="0">
+          <Group key="132284426434490944">
+            <Data key="Port Format" value="0,6" />
+          </Group>
+        </Group>
+      </Group>
+    </Group>
+  </Group>
+  <Group key="PlaceDir">
+    <Data key="count" value="0" />
+  </Group>
+  <Group key="System3">
+    <Data key="CYDEV_CONFIG_FASTBOOT_ENABLED" value="True" />
+    <Data key="CYDEV_CONFIG_UNUSED_IO" value="AllowButWarn" />
+    <Data key="CYDEV_CONFIGURATION_ECC" value="True" />
+    <Data key="CYDEV_CONFIGURATION_MODE" value="COMPRESSED" />
+    <Data key="CYDEV_DEBUGGING_DPS" value="SWD_SWV" />
+    <Data key="CYDEV_DEBUGGING_XRES" value="False" />
+    <Data key="CYDEV_ECC_ENABLE" value="False" />
+    <Data key="CYDEV_HEAP_SIZE" value="0x80" />
+    <Data key="CYDEV_INSTRUCT_CACHE_ENABLED" value="True" />
+    <Data key="CYDEV_PROTECTION_ENABLE" value="False" />
+    <Data key="CYDEV_STACK_SIZE" value="0x0800" />
+    <Data key="CYDEV_TEMPERATURE" value="-40C - 85/125C" />
+    <Data key="CYDEV_TRACE_ENABLED" value="False" />
+    <Data key="CYDEV_USE_BUNDLED_CMSIS" value="True" />
+    <Data key="CYDEV_VARIABLE_VDDA" value="False" />
+    <Data key="CYDEV_VDDA" value="5.0" />
+    <Data key="CYDEV_VDDD" value="5.0" />
+    <Data key="CYDEV_VDDIO0" value="5.0" />
+    <Data key="CYDEV_VDDIO1" value="5.0" />
+    <Data key="CYDEV_VDDIO2" value="5.0" />
+    <Data key="CYDEV_VDDIO3" value="5.0" />
+    <Data key="CYDEV_WO_NVL_ENABLED" value="False" />
+  </Group>
+</DesignWideResources>
